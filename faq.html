@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ (Tanya Jawab) - NIXY GAMING</title>
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <meta name="description" content="Temukan jawaban atas pertanyaan umum tentang NIXY GAMING. FAQ kami mencakup keamanan, legalitas, cara mengunduh, dan permintaan game.">
+    <meta name="keywords" content="faq, tanya jawab, pertanyaan umum, NIXY GAMING, bantuan, download aman, legalitas">
+    <meta name="author" content="NIXY GAMING">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nixygaming.my.id/faq.html">
+    <meta property="og:title" content="FAQ (Tanya Jawab) - NIXY GAMING">
+    <meta property="og:description" content="Temukan jawaban atas pertanyaan umum tentang NIXY GAMING.">
+    <meta property="og:image" content="https://nixygaming.my.id/banner.jpg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://nixygaming.my.id/faq.html">
+    <meta property="twitter:title" content="FAQ (Tanya Jawab) - NIXY GAMING">
+    <meta property="twitter:description" content="Temukan jawaban atas pertanyaan umum tentang NIXY GAMING.">
+    <meta property="twitter:image" content="https://nixygaming.my.id/banner.jpg">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --text-color: #2c3e50;
+            --text-color-light: #6c757d;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --border-color: #e9e9e9;
+            --blue-color: #007bff; 
+            --red-color: #dc3545; 
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --text-color-light: #a0a0a0;
+            --card-bg: #1e1e1e;
+            --header-bg: #1e1e1e;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --border-color: #333;
+        }
+        
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px 15px; }
+
+        header {
+            background-color: var(--header-bg);
+            box-shadow: 0 2px 4px var(--shadow-color);
+            padding: 10px 15px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 998;
+        }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .header-logo img { height: 30px; display: block; }
+        .header-btn { background: none; border: none; font-size: 1.4em; color: var(--text-color-light); cursor: pointer; padding: 5px; }
+        .header-btn:hover { color: var(--text-color); }
+
+        .footer-container { background-color: var(--card-bg); border-radius: 16px; padding: 20px; box-shadow: 0 4px 12px var(--shadow-color); margin-top: 40px; }
+        .footer-links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+        .footer-link { background-color: var(--bg-color); color: var(--text-color); padding: 8px; border-radius: 8px; text-align: center; text-decoration: none; font-size: 0.8em; font-weight: 500; transition: var(--transition-smooth); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .footer-link:hover { background-color: var(--blue-color); color: white; }
+        .footer-social-icons { display: flex; justify-content: center; gap: 25px; padding: 20px 0; border-top: 1px solid var(--border-color); }
+        .footer-social-icons a { color: var(--text-color-light); font-size: 1.5em; transition: var(--transition-smooth); }
+        .footer-social-icons a:hover { color: var(--blue-color); transform: scale(1.1); }
+        .footer-copyright { text-align: center; font-size: 0.8em; color: var(--text-color-light); padding-top: 15px; border-top: 1px solid var(--border-color); }
+        
+        /* Static Page & FAQ Content Style */
+        .page-content-wrapper {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            line-height: 1.7;
+        }
+        .page-content-wrapper h1 { font-size: 1.8em; margin-bottom: 25px; color: var(--text-color); }
+        .page-content-wrapper p { margin-bottom: 15px; color: var(--text-color-light); }
+        .page-content-wrapper a { color: var(--blue-color); text-decoration: none; }
+        .page-content-wrapper a:hover { text-decoration: underline; }
+
+        .faq-item {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            overflow: hidden; /* Penting agar border-radius berfungsi */
+        }
+        .faq-item summary {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 15px 20px;
+            position: relative;
+            list-style: none; /* Hapus panah default */
+            display: flex; /* Gunakan Flexbox untuk perataan */
+            align-items: center; /* Sejajarkan vertikal */
+            justify-content: space-between; /* Dorong teks ke kiri & ikon ke kanan */
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-item summary:hover {
+            background-color: var(--bg-color);
+        }
+        .faq-item summary::after {
+            content: '\f078'; /* Ikon panah ke bawah dari Font Awesome */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            transition: transform 0.3s ease;
+            margin-left: 10px; /* Jarak antara teks dan ikon */
+        }
+        .faq-item[open] > summary::after {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            padding: 0 20px 20px 20px;
+            color: var(--text-color-light);
+            border-top: 1px solid var(--border-color);
+        }
+        .faq-answer p {
+            padding-top: 15px;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+             <div class="header-logo">
+                <a href="/"><img src="navigasi.png" alt="NIXY GAMING"></a>
+            </div>
+        </div>
+         <a href="/" class="header-btn" aria-label="Kembali ke Beranda"><i class="fa-solid fa-home"></i></a>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-content-wrapper">
+                <h1>Tanya Jawab (FAQ)</h1>
+
+                <details class="faq-item">
+                    <summary>Apakah aman mengunduh file dari NIXY GAMING?</summary>
+                    <div class="faq-answer">
+                        <p>Ya, keamanan adalah prioritas utama kami. Setiap file yang kami tautkan berasal dari sumber terpercaya dan kami melakukan pemeriksaan untuk memastikan semuanya aman. Namun, kami tetap menyarankan Anda untuk selalu mengaktifkan antivirus di perangkat Anda sebagai lapisan perlindungan tambahan.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Apakah semua game di situs ini gratis?</summary>
+                    <div class="faq-answer">
+                        <p>Betul. Semua game yang tersedia di NIXY GAMING dapat diunduh dan dimainkan secara gratis untuk tujuan penggunaan pribadi dan non-komersial. Jika Anda menyukai sebuah game, kami sangat mendorong Anda untuk mendukung pengembangnya dengan membeli versi resmi dari game tersebut.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Apakah legal mengunduh dari sini?</summary>
+                    <div class="faq-answer">
+                        <p>NIXY GAMING berfungsi sebagai direktori atau mesin pencari. Kami tidak menyimpan file apa pun di server kami. Kami hanya menyediakan tautan ke konten yang sudah tersedia di internet. Penggunaan file-file ini adalah tanggung jawab penuh dari pengguna. Silakan baca halaman <a href="disclaimer.html">Disclaimer</a> dan <a href="dmca.html">DMCA</a> kami untuk informasi lebih lanjut.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Saya tidak bisa menemukan game yang saya cari. Bisakah saya memintanya?</summary>
+                    <div class="faq-answer">
+                        <p>Tentu saja! Kami senang menerima masukan dari komunitas kami. Jika ada game yang Anda inginkan tetapi belum tersedia di situs kami, silakan kirimkan permintaan Anda melalui halaman <a href="contact.html">Hubungi Kami</a>.</p>
+                    </div>
+                </details>
+                
+                <details class="faq-item">
+                    <summary>Tautan unduhan rusak atau tidak berfungsi. Apa yang harus saya lakukan?</summary>
+                    <div class="faq-answer">
+                        <p>Terkadang, tautan bisa dihapus oleh pihak ketiga. Jika Anda menemukan tautan yang rusak, kami akan sangat berterima kasih jika Anda melaporkannya kepada kami melalui halaman <a href="contact.html">Hubungi Kami</a> agar kami bisa segera memperbaikinya.</p>
+                    </div>
+                </details>
+
+            </div>
+
+             <footer class="footer-container">
+                <div class="footer-links-grid">
+                    <a href="privacy-policy.html" class="footer-link">Privacy</a>
+                    <a href="about.html" class="footer-link">About</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
+                    <a href="terms.html" class="footer-link">Terms</a>
+                    <a href="disclaimer.html" class="footer-link">Disclaimer</a>
+                    <a href="dmca.html" class="footer-link">DMCA</a>
+                    <a href="sitemap.html" class="footer-link">Sitemap</a>
+                    <a href="cookie-policy.html" class="footer-link">Cookie</a>
+                </div>
+                <div class="footer-social-icons">
+                    <a href="https://t.me/+JZVMFir6yM0yZmY1" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="/" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    <a href="/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="/" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+                <div class="footer-copyright" id="copyright-year">
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const setCopyrightYear = () => {
+            const copyrightElement = document.getElementById('copyright-year');
+            if (copyrightElement) {
+                copyrightElement.innerHTML = `All Right Reserved Copyright © ${new Date().getFullYear()}`;
+            }
+        };
+        setCopyrightYear();
+    });
+    </script>
+
+</body>
+</html>
