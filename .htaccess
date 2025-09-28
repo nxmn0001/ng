@@ -1,0 +1,13 @@
+# ===============================================================
+# ATURAN UNTUK REDIRECT SEMUA SUBDOMAIN KE DOMAIN UTAMA
+# Ini juga membantu SEO sitemap dengan memastikan hanya ada 1 versi
+# ===============================================================
+# MENGAKTIFKAN MODUL REWRITE
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^nixygaming\.my\.id$ [NC]
+RewriteRule ^(.*)$ https://nixygaming.my.id/$1 [L,R=301]
+
+# ===============================================================
+# ATURAN UNTUK HALAMAN ERROR 404 CUSTOM
+# ===============================================================
+ErrorDocument 404 /404.html
