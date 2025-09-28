@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Level Tidak Ditemukan - NIXY GAMING</title>
+    
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <meta name="description" content="Portal yang kamu tuju sepertinya korup atau berada di luar map. Kembali ke markas dan pilih level lainnya di NIXY GAMING.">
+    <meta name="author" content="NIXY GAMING">
+    <meta name="robots" content="noindex, follow">
+
+    <meta property="og:title" content="404 Level Tidak Ditemukan - NIXY GAMING">
+    <meta property="og:description" content="Portal yang kamu tuju sepertinya korup atau berada di luar map.">
+    <meta property="og:url" content="https://nixygaming.my.id/404.html">
+    <meta property="og:image" content="https://nixygaming.my.id/banner.jpg">
+    <meta property="twitter:card" content="summary_large_image">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        /* --- TEMA WARNA SESUAI NIXY GAMING --- */
+        :root {
+            --bg-color: #f0f2f5;
+            --text-color: #2c3e50;
+            --text-color-light: #6c757d;
+            --blue-color: #007bff;
+            --blue-dark-color: #0056b3;
+            --red-color: #dc3545;
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --text-color-light: #a0a0a0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* MENGHILANGKAN HIGHLIGHT BIRU SAAT DIKLIK PADA MOBILE */
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+        
+        /* --- Latar Belakang & Efek Khusus Mode Gelap --- */
+        body.dark-mode {
+            background: #0d1117;
+        }
+
+        .effects-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        body.dark-mode .effects-wrapper {
+            opacity: 1;
+        }
+
+        .soft-glow {
+            position: absolute;
+            top: 10%;
+            right: 15%;
+            width: 100px;
+            height: 100px;
+            background: transparent;
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(200, 210, 240, 0.2), 0 0 100px rgba(200, 210, 240, 0.1);
+        }
+
+        .stars {
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(1px 1px at 20% 30%, white, transparent),
+                radial-gradient(1px 1px at 80% 10%, white, transparent),
+                radial-gradient(1px 1px at 50% 70%, white, transparent);
+            animation: twinkle 8s infinite linear;
+        }
+        
+        /* --- Kontainer Utama --- */
+        .scene-container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .glitch-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        /* Animasi Glitch yang Dioptimalkan (Anti-Lag) */
+        .glitch-text {
+            font-size: clamp(6rem, 25vw, 12rem);
+            font-weight: 900;
+            line-height: 1;
+            color: var(--blue-color);
+            text-shadow: 0 0 5px var(--blue-color);
+            animation: glitch-optimized 5s infinite linear;
+            position: relative;
+        }
+
+        .ghost-icon {
+            font-size: clamp(2rem, 8vw, 3rem);
+            color: var(--text-color);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(120%, -20%);
+            opacity: 0.9;
+            animation: bobbing 3s infinite ease-in-out;
+            transition: color 0.3s ease;
+        }
+
+        body:not(.dark-mode) .ghost-icon {
+            color: var(--text-color-light);
+        }
+
+        .content-wrapper {
+            max-width: 500px;
+            animation: fadeIn 1.5s 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        p {
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            color: var(--text-color-light);
+            line-height: 1.7;
+            margin-bottom: 35px;
+            transition: color 0.3s ease;
+        }
+
+        .action-button {
+            background: linear-gradient(45deg, var(--blue-color), var(--blue-dark-color));
+            color: white;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0, 123, 255, 0.4);
+            cursor: pointer; /* Pastikan kursor pointer */
+            outline: none; /* Menghilangkan outline fokus default */
+        }
+
+        /* Styling fokus untuk aksesibilitas (opsional, tapi disarankan) */
+        .action-button:focus-visible {
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.6); /* Custom outline yang lebih baik */
+        }
+
+        .action-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 123, 255, 0.5);
+        }
+
+        /* --- Animasi --- */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes bobbing {
+            0%, 100% { transform: translate(120%, -20%) rotate(5deg); }
+            50% { transform: translate(125%, -30%) rotate(-5deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes glitch-optimized {
+            0%, 100% { text-shadow: 0 0 5px var(--blue-color), -2px 2px 5px var(--red-color); transform: none; }
+            25% { text-shadow: 0 0 5px var(--blue-color), 2px -2px 5px var(--red-color); transform: skewX(5deg) scale(1.02); }
+            50% { text-shadow: 0 0 5px var(--blue-color), 2px 2px 5px var(--red-color); transform: skewX(-5deg) scale(1); }
+            75% { text-shadow: 0 0 5px var(--blue-color), -2px -2px 5px var(--red-color); transform: skewX(2deg) scale(0.98); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="effects-wrapper">
+        <div class="stars"></div>
+        <div class="soft-glow"></div>
+    </div>
+
+    <div class="scene-container">
+        <div class="glitch-wrapper">
+            <div class="glitch-text">404</div>
+            <i class="fa-solid fa-ghost ghost-icon"></i>
+        </div>
+        
+        <div class="content-wrapper">
+            <h1>NOT Found</h1>
+            <p>
+            </p>
+            <a href="https://nixygaming.my.id/" class="action-button">
+                <i class="fa-solid fa-person-falling-burst"></i>
+                Teleport ke Markas
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Script ini akan memeriksa localStorage untuk tema
+            // dan menerapkan .dark-mode ke body jika diperlukan.
+            // Ini penting agar CSS dapat menampilkan versi tema yang benar.
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+
+</body>
+</html>
