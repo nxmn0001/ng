@@ -688,7 +688,7 @@
 
     <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // --- Deklarasi Semua Elemen ---
+    // --- Deklarasi Elemen UI ---
     const homeContent = document.getElementById('home-content');
     const searchResultsContainer = document.getElementById('search-results-container');
     const categoryResultsContainer = document.getElementById('category-results-container');
@@ -710,33 +710,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const headerLogoLink = document.querySelector('.header-logo a');
     const blogSearchResultsList = document.getElementById('blog-search-results-list');
     const blogSearchHeader = document.getElementById('blog-search-header');
-    const allItems = document.querySelectorAll('#update-games-list .app-card');
-    const allBlogItems = document.querySelectorAll('#blog-list .blog-post-item');
 
     // --- Fungsi-Fungsi Utama ---
 
-    // Fungsi untuk toggle overlay (menu/pencarian)
     const toggleOverlay = (overlay, isActive) => {
         overlay.classList.toggle('active', isActive);
         document.body.style.overflow = isActive ? 'hidden' : '';
     };
 
-    // Fungsi untuk menerapkan tema (terang/gelap)
     const applyTheme = (theme) => {
         document.body.classList.toggle('dark-mode', theme === 'dark');
         darkModeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
     };
 
-    // Fungsi untuk menampilkan konten utama (homepage)
     const showHomeContent = () => {
         homeContent.style.display = 'block';
         searchResultsContainer.style.display = 'none';
         categoryResultsContainer.style.display = 'none';
     };
 
-    // Fungsi untuk menjalankan pencarian
+    // --- FUNGSI PENCARIAN YANG DIPERBAIKI ---
     const executeSearch = (query) => {
+        // AMBIL DATA TERBARU SETIAP KALI FUNGSI INI DIJALANKAN
+        const allItems = document.querySelectorAll('#update-games-list .app-card');
+        const allBlogItems = document.querySelectorAll('#blog-list .blog-post-item');
+
         const searchTerm = query.toLowerCase().trim();
+        
+        // Cek di console browser (F12) untuk debugging
+        console.log(`Mencari untuk: "${searchTerm}"`);
+        console.log(`Jumlah game yang akan dicari: ${allItems.length}`);
+        console.log(`Jumlah artikel yang akan dicari: ${allBlogItems.length}`);
+
         if (!searchTerm) {
             showHomeContent();
             return;
@@ -786,7 +791,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         noResultsMessage.style.display = (!gameResultsFound && !blogResultsFound) ? 'block' : 'none';
-
         homeContent.style.display = 'none';
         categoryResultsContainer.style.display = 'none';
         searchResultsContainer.style.display = 'block';
@@ -797,14 +801,12 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // Fungsi untuk menangani event pencarian (saat menekan Enter)
     const handleSearchEvent = (event) => {
         if (event.key === 'Enter') {
             executeSearch(event.target.value);
         }
     };
     
-    // Fungsi untuk memeriksa parameter pencarian di URL saat halaman dimuat
     const checkUrlForSearch = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const searchQuery = urlParams.get('q');
@@ -813,8 +815,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    // Fungsi untuk menampilkan hasil berdasarkan kategori
     const showCategoryResults = (categoryName) => {
+        const allItems = document.querySelectorAll('#update-games-list .app-card'); // Ambil data terbaru
         homeContent.style.display = 'none';
         searchResultsContainer.style.display = 'none';
         categoryResultsContainer.style.display = 'block';
@@ -841,7 +843,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // Fungsi untuk membuat daftar kategori secara dinamis
     const generateCategories = (sourceListSelector, targetGridSelector) => {
         const sourceList = document.querySelector(sourceListSelector);
         const targetGrid = document.querySelector(targetGridSelector);
@@ -868,7 +869,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    // Fungsi untuk mengisi bagian "New Update"
     const populateNewUpdateSection = () => {
         const newUpdateList = document.getElementById('new-update-list');
         const gamesList = document.getElementById('update-games-list');
@@ -878,7 +878,6 @@ document.addEventListener('DOMContentLoaded', function() {
         latestGames.forEach(game => newUpdateList.appendChild(game.cloneNode(true)));
     };
     
-    // Fungsi untuk animasi kartu saat muncul
     const animateCards = () => {
         const cards = document.querySelectorAll('#home-content .app-card, #home-content .blog-post-item');
         cards.forEach((card, index) => {
@@ -888,7 +887,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
-    // Fungsi untuk set tahun copyright
     const setCopyrightYear = () => {
         const copyrightElement = document.getElementById('copyright-year');
         if (copyrightElement) {
@@ -896,10 +894,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-
     // --- Inisialisasi & Event Listeners ---
 
-    // Event listener untuk tombol menu dan search
     menuToggle.addEventListener('click', () => toggleOverlay(menuOverlay, true));
     menuClose.addEventListener('click', () => toggleOverlay(menuOverlay, false));
     searchToggle.addEventListener('click', () => {
@@ -908,7 +904,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     searchClose.addEventListener('click', () => toggleOverlay(searchOverlay, false));
 
-    // Inisialisasi dan event listener untuk Dark Mode
     let currentTheme = localStorage.getItem('theme') || 'light';
     applyTheme(currentTheme);
     darkModeToggle.addEventListener('click', () => {
@@ -917,11 +912,9 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('theme', currentTheme);
     });
 
-    // Event listener untuk input pencarian
     mainSearchInput.addEventListener('keypress', handleSearchEvent);
     menuSearchInput.addEventListener('keypress', handleSearchEvent);
     
-    // Event listener untuk tombol "Lihat Semua"
     allViewAllButtons.forEach(button => {
         button.addEventListener('click', function() {
             const listContainer = this.parentElement.nextElementSibling;
@@ -932,7 +925,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Event listener untuk logo di header (kembali ke home)
     headerLogoLink.addEventListener('click', (e) => {
         e.preventDefault();
         showHomeContent();
@@ -941,7 +933,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Menjalankan Fungsi Saat Halaman Dimuat ---
     setCopyrightYear();
-    checkUrlForSearch(); // Cek URL untuk pencarian
+    checkUrlForSearch(); 
     populateNewUpdateSection();
     generateCategories('#update-games-list', '#game-categories-grid');
     animateCards();
