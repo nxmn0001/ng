@@ -61,4 +61,10 @@
 	<lastmod>2025-09-28T15:13:57+01:00</lastmod>
 	<priority>1.0</priority>
 </url>
+    <url>
+        <loc>https://nixygaming.my.id/games/subway-v289/</loc>
+        <lastmod>2025-09-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.80</priority>
+    </url>
 </urlset>
