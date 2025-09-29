@@ -687,230 +687,266 @@
     </main>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const homeContent = document.getElementById('home-content');
-        const searchResultsContainer = document.getElementById('search-results-container');
-        const categoryResultsContainer = document.getElementById('category-results-container');
-        const searchResultsList = document.getElementById('search-results-list');
-        const categoryResultsList = document.getElementById('category-results-list');
-        const categoryResultsTitle = document.getElementById('category-results-title');
-        const noResultsMessage = document.getElementById('no-results-message');
-        const menuToggle = document.getElementById('menu-toggle');
-        const menuOverlay = document.getElementById('menu-overlay');
-        const menuClose = document.getElementById('menu-close');
-        const searchToggle = document.getElementById('search-toggle');
-        const searchOverlay = document.getElementById('search-overlay');
-        const searchClose = document.getElementById('search-close');
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        const darkModeIcon = darkModeToggle.querySelector('i');
-        const mainSearchInput = document.getElementById('search-input');
-        const menuSearchInput = document.getElementById('menu-search-input');
-        const allViewAllButtons = document.querySelectorAll('.view-all-btn');
-        const headerLogoLink = document.querySelector('.header-logo a');
-        
-        const blogSearchResultsList = document.getElementById('blog-search-results-list');
-        const blogSearchHeader = document.getElementById('blog-search-header');
-        
-        const populateNewUpdateSection = () => {
-            const newUpdateList = document.getElementById('new-update-list');
-            const gamesList = document.getElementById('update-games-list');
-            if (!newUpdateList || !gamesList) return;
-            
-            // Mengambil 5 game terbaru untuk bagian "New Update"
-            const latestGames = Array.from(gamesList.querySelectorAll('.app-card')).slice(0, 5);
-            latestGames.forEach(game => newUpdateList.appendChild(game.cloneNode(true)));
-        };
-        
-        const allItems = document.querySelectorAll('#update-games-list .app-card');
-        const allBlogItems = document.querySelectorAll('#blog-list .blog-post-item');
+document.addEventListener('DOMContentLoaded', function() {
+    // --- Deklarasi Semua Elemen ---
+    const homeContent = document.getElementById('home-content');
+    const searchResultsContainer = document.getElementById('search-results-container');
+    const categoryResultsContainer = document.getElementById('category-results-container');
+    const searchResultsList = document.getElementById('search-results-list');
+    const categoryResultsList = document.getElementById('category-results-list');
+    const categoryResultsTitle = document.getElementById('category-results-title');
+    const noResultsMessage = document.getElementById('no-results-message');
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const menuClose = document.getElementById('menu-close');
+    const searchToggle = document.getElementById('search-toggle');
+    const searchOverlay = document.getElementById('search-overlay');
+    const searchClose = document.getElementById('search-close');
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const darkModeIcon = darkModeToggle.querySelector('i');
+    const mainSearchInput = document.getElementById('search-input');
+    const menuSearchInput = document.getElementById('menu-search-input');
+    const allViewAllButtons = document.querySelectorAll('.view-all-btn');
+    const headerLogoLink = document.querySelector('.header-logo a');
+    const blogSearchResultsList = document.getElementById('blog-search-results-list');
+    const blogSearchHeader = document.getElementById('blog-search-header');
+    const allItems = document.querySelectorAll('#update-games-list .app-card');
+    const allBlogItems = document.querySelectorAll('#blog-list .blog-post-item');
 
-        const generateCategories = (sourceListSelector, targetGridSelector) => {
-            const sourceList = document.querySelector(sourceListSelector);
-            const targetGrid = document.querySelector(targetGridSelector);
-            if (!sourceList || !targetGrid) return;
-            const categories = new Set();
-            sourceList.querySelectorAll('.app-card').forEach(card => {
-                const categoryDetail = card.querySelectorAll('.card-details')[1];
-                if (categoryDetail) {
-                    const categoryText = categoryDetail.textContent.replace('Category', '').trim();
-                    if (categoryText) categories.add(categoryText);
-                }
-            });
-            targetGrid.innerHTML = '';
-            categories.forEach(category => {
-                const link = document.createElement('a');
-                link.className = 'category-button';
-                link.href = '#';
-                link.textContent = category;
-                link.addEventListener('click', e => {
-                    e.preventDefault();
-                    showCategoryResults(category);
-                });
-                targetGrid.appendChild(link);
-            });
-        };
+    // --- Fungsi-Fungsi Utama ---
 
-        const showCategoryResults = (categoryName) => {
-            homeContent.style.display = 'none';
-            searchResultsContainer.style.display = 'none';
-            categoryResultsContainer.style.display = 'block';
-            categoryResultsTitle.textContent = `Result: ${categoryName}`;
-            categoryResultsList.innerHTML = '';
+    // Fungsi untuk toggle overlay (menu/pencarian)
+    const toggleOverlay = (overlay, isActive) => {
+        overlay.classList.toggle('active', isActive);
+        document.body.style.overflow = isActive ? 'hidden' : '';
+    };
 
-            const matchingItems = [];
-            allItems.forEach(card => {
-                const categoryElement = card.querySelectorAll('.card-details')[1];
-                if (categoryElement && categoryElement.textContent.replace('Category', '').trim() === categoryName) {
-                    matchingItems.push(card);
-                }
-            });
+    // Fungsi untuk menerapkan tema (terang/gelap)
+    const applyTheme = (theme) => {
+        document.body.classList.toggle('dark-mode', theme === 'dark');
+        darkModeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    };
 
-            const addedBaseNames = new Set();
-            matchingItems.forEach(item => {
-                const title = item.querySelector('h3').textContent;
-                const baseName = title.replace(/\s*v[\d\.]+.*$/i, '').trim();
-                if (!addedBaseNames.has(baseName)) {
-                    categoryResultsList.appendChild(item.cloneNode(true));
-                    addedBaseNames.add(baseName);
-                }
-            });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-        
-        const animateCards = () => {
-            const cards = document.querySelectorAll('#home-content .app-card, #home-content .blog-post-item');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add('card-anim');
-                }, index * 80);
-            });
-        };
+    // Fungsi untuk menampilkan konten utama (homepage)
+    const showHomeContent = () => {
+        homeContent.style.display = 'block';
+        searchResultsContainer.style.display = 'none';
+        categoryResultsContainer.style.display = 'none';
+    };
 
-        const setCopyrightYear = () => {
-            const copyrightElement = document.getElementById('copyright-year');
-            if (copyrightElement) {
-                copyrightElement.innerHTML = `All Right Reserved Copyright © ${new Date().getFullYear()}`;
-            }
-        };
-
-        populateNewUpdateSection();
-        generateCategories('#update-games-list', '#game-categories-grid');
-        animateCards();
-        setCopyrightYear();
-        
-        const showHomeContent = () => {
-            homeContent.style.display = 'block';
-            searchResultsContainer.style.display = 'none';
-            categoryResultsContainer.style.display = 'none';
-        };
-        
-        const toggleOverlay = (overlay, isActive) => {
-            overlay.classList.toggle('active', isActive);
-            document.body.style.overflow = isActive ? 'hidden' : '';
-        };
-
-        menuToggle.addEventListener('click', () => toggleOverlay(menuOverlay, true));
-        menuClose.addEventListener('click', () => toggleOverlay(menuOverlay, false));
-        searchToggle.addEventListener('click', () => {
-            toggleOverlay(searchOverlay, true);
-            mainSearchInput.focus();
-        });
-        searchClose.addEventListener('click', () => toggleOverlay(searchOverlay, false));
-
-        const applyTheme = (theme) => {
-            document.body.classList.toggle('dark-mode', theme === 'dark');
-            darkModeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-        };
-        let currentTheme = localStorage.getItem('theme') || 'light';
-        applyTheme(currentTheme);
-        darkModeToggle.addEventListener('click', () => {
-            currentTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
-            applyTheme(currentTheme);
-            localStorage.setItem('theme', currentTheme);
-        });
-
-        const executeSearch = (query) => {
-            const searchTerm = query.toLowerCase().trim();
-            if (!searchTerm) {
-                showHomeContent();
-                return;
-            }
-
-            searchResultsList.innerHTML = '';
-            blogSearchResultsList.innerHTML = '';
-            blogSearchHeader.style.display = 'none';
-
-            const matchingGames = [];
-            allItems.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const categoryElement = card.querySelectorAll('.card-details')[1];
-                const categoryText = categoryElement ? categoryElement.textContent.toLowerCase() : '';
-                if (title.includes(searchTerm) || categoryText.includes(searchTerm)) {
-                    matchingGames.push(card);
-                }
-            });
-            const addedGameBaseNames = new Set();
-            matchingGames.forEach(item => {
-                const title = item.querySelector('h3').textContent;
-                const baseName = title.replace(/\s*v[\d\.]+.*$/i, '').trim();
-                if (!addedGameBaseNames.has(baseName)) {
-                    searchResultsList.appendChild(item.cloneNode(true));
-                    addedGameBaseNames.add(baseName);
-                }
-            });
-
-            const matchingBlogItems = [];
-            allBlogItems.forEach(item => {
-                const title = item.textContent.toLowerCase();
-                if (title.includes(searchTerm)) {
-                    matchingBlogItems.push(item);
-                }
-            });
-            matchingBlogItems.forEach(item => {
-                blogSearchResultsList.appendChild(item.cloneNode(true));
-            });
-
-            const gameResultsFound = searchResultsList.children.length > 0;
-            const blogResultsFound = blogSearchResultsList.children.length > 0;
-
-            if (blogResultsFound) {
-                blogSearchHeader.style.display = 'flex'; // Tampilkan header jika ada hasil artikel
-            }
-
-            noResultsMessage.style.display = (!gameResultsFound && !blogResultsFound) ? 'block' : 'none';
-
-            homeContent.style.display = 'none';
-            categoryResultsContainer.style.display = 'none';
-            searchResultsContainer.style.display = 'block';
-            if(searchOverlay.classList.contains('active')) toggleOverlay(searchOverlay, false);
-            if(menuOverlay.classList.contains('active')) toggleOverlay(menuOverlay, false);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-
-        const handleSearchEvent = (event) => {
-            if (event.key === 'Enter') executeSearch(event.target.value);
-        };
-
-        mainSearchInput.addEventListener('keypress', handleSearchEvent);
-        menuSearchInput.addEventListener('keypress', handleSearchEvent);
-        
-        allViewAllButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const listContainer = this.parentElement.nextElementSibling;
-                if (listContainer && (listContainer.classList.contains('app-list') || listContainer.classList.contains('blog-list'))) {
-                    listContainer.classList.add('show-all');
-                    this.style.display = 'none'; 
-                }
-            });
-        });
-
-        headerLogoLink.addEventListener('click', (e) => {
-            e.preventDefault();
+    // Fungsi untuk menjalankan pencarian
+    const executeSearch = (query) => {
+        const searchTerm = query.toLowerCase().trim();
+        if (!searchTerm) {
             showHomeContent();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+
+        searchResultsList.innerHTML = '';
+        blogSearchResultsList.innerHTML = '';
+        blogSearchHeader.style.display = 'none';
+
+        // Pencarian Game
+        const matchingGames = [];
+        allItems.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const categoryElement = card.querySelectorAll('.card-details')[1];
+            const categoryText = categoryElement ? categoryElement.textContent.toLowerCase() : '';
+            if (title.includes(searchTerm) || categoryText.includes(searchTerm)) {
+                matchingGames.push(card);
+            }
+        });
+        const addedGameBaseNames = new Set();
+        matchingGames.forEach(item => {
+            const title = item.querySelector('h3').textContent;
+            const baseName = title.replace(/\s*v[\d\.]+.*$/i, '').trim();
+            if (!addedGameBaseNames.has(baseName)) {
+                searchResultsList.appendChild(item.cloneNode(true));
+                addedGameBaseNames.add(baseName);
+            }
+        });
+
+        // Pencarian Artikel Blog
+        const matchingBlogItems = [];
+        allBlogItems.forEach(item => {
+            const title = item.textContent.toLowerCase();
+            if (title.includes(searchTerm)) {
+                matchingBlogItems.push(item);
+            }
+        });
+        matchingBlogItems.forEach(item => {
+            blogSearchResultsList.appendChild(item.cloneNode(true));
+        });
+
+        const gameResultsFound = searchResultsList.children.length > 0;
+        const blogResultsFound = blogSearchResultsList.children.length > 0;
+
+        if (blogResultsFound) {
+            blogSearchHeader.style.display = 'flex';
+        }
+
+        noResultsMessage.style.display = (!gameResultsFound && !blogResultsFound) ? 'block' : 'none';
+
+        homeContent.style.display = 'none';
+        categoryResultsContainer.style.display = 'none';
+        searchResultsContainer.style.display = 'block';
+        
+        if(searchOverlay.classList.contains('active')) toggleOverlay(searchOverlay, false);
+        if(menuOverlay.classList.contains('active')) toggleOverlay(menuOverlay, false);
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Fungsi untuk menangani event pencarian (saat menekan Enter)
+    const handleSearchEvent = (event) => {
+        if (event.key === 'Enter') {
+            executeSearch(event.target.value);
+        }
+    };
+    
+    // Fungsi untuk memeriksa parameter pencarian di URL saat halaman dimuat
+    const checkUrlForSearch = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('q');
+        if (searchQuery) {
+            executeSearch(searchQuery);
+        }
+    };
+    
+    // Fungsi untuk menampilkan hasil berdasarkan kategori
+    const showCategoryResults = (categoryName) => {
+        homeContent.style.display = 'none';
+        searchResultsContainer.style.display = 'none';
+        categoryResultsContainer.style.display = 'block';
+        categoryResultsTitle.textContent = `Result: ${categoryName}`;
+        categoryResultsList.innerHTML = '';
+
+        const matchingItems = [];
+        allItems.forEach(card => {
+            const categoryElement = card.querySelectorAll('.card-details')[1];
+            if (categoryElement && categoryElement.textContent.replace('Category', '').trim() === categoryName) {
+                matchingItems.push(card);
+            }
+        });
+
+        const addedBaseNames = new Set();
+        matchingItems.forEach(item => {
+            const title = item.querySelector('h3').textContent;
+            const baseName = title.replace(/\s*v[\d\.]+.*$/i, '').trim();
+            if (!addedBaseNames.has(baseName)) {
+                categoryResultsList.appendChild(item.cloneNode(true));
+                addedBaseNames.add(baseName);
+            }
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Fungsi untuk membuat daftar kategori secara dinamis
+    const generateCategories = (sourceListSelector, targetGridSelector) => {
+        const sourceList = document.querySelector(sourceListSelector);
+        const targetGrid = document.querySelector(targetGridSelector);
+        if (!sourceList || !targetGrid) return;
+        const categories = new Set();
+        sourceList.querySelectorAll('.app-card').forEach(card => {
+            const categoryDetail = card.querySelectorAll('.card-details')[1];
+            if (categoryDetail) {
+                const categoryText = categoryDetail.textContent.replace('Category', '').trim();
+                if (categoryText) categories.add(categoryText);
+            }
+        });
+        targetGrid.innerHTML = '';
+        categories.forEach(category => {
+            const link = document.createElement('a');
+            link.className = 'category-button';
+            link.href = '#';
+            link.textContent = category;
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                showCategoryResults(category);
+            });
+            targetGrid.appendChild(link);
+        });
+    };
+
+    // Fungsi untuk mengisi bagian "New Update"
+    const populateNewUpdateSection = () => {
+        const newUpdateList = document.getElementById('new-update-list');
+        const gamesList = document.getElementById('update-games-list');
+        if (!newUpdateList || !gamesList) return;
+        
+        const latestGames = Array.from(gamesList.querySelectorAll('.app-card')).slice(0, 5);
+        latestGames.forEach(game => newUpdateList.appendChild(game.cloneNode(true)));
+    };
+    
+    // Fungsi untuk animasi kartu saat muncul
+    const animateCards = () => {
+        const cards = document.querySelectorAll('#home-content .app-card, #home-content .blog-post-item');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('card-anim');
+            }, index * 80);
+        });
+    };
+    
+    // Fungsi untuk set tahun copyright
+    const setCopyrightYear = () => {
+        const copyrightElement = document.getElementById('copyright-year');
+        if (copyrightElement) {
+            copyrightElement.innerHTML = `All Right Reserved Copyright © ${new Date().getFullYear()}`;
+        }
+    };
+
+
+    // --- Inisialisasi & Event Listeners ---
+
+    // Event listener untuk tombol menu dan search
+    menuToggle.addEventListener('click', () => toggleOverlay(menuOverlay, true));
+    menuClose.addEventListener('click', () => toggleOverlay(menuOverlay, false));
+    searchToggle.addEventListener('click', () => {
+        toggleOverlay(searchOverlay, true);
+        mainSearchInput.focus();
+    });
+    searchClose.addEventListener('click', () => toggleOverlay(searchOverlay, false));
+
+    // Inisialisasi dan event listener untuk Dark Mode
+    let currentTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(currentTheme);
+    darkModeToggle.addEventListener('click', () => {
+        currentTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+        applyTheme(currentTheme);
+        localStorage.setItem('theme', currentTheme);
+    });
+
+    // Event listener untuk input pencarian
+    mainSearchInput.addEventListener('keypress', handleSearchEvent);
+    menuSearchInput.addEventListener('keypress', handleSearchEvent);
+    
+    // Event listener untuk tombol "Lihat Semua"
+    allViewAllButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const listContainer = this.parentElement.nextElementSibling;
+            if (listContainer && (listContainer.classList.contains('app-list') || listContainer.classList.contains('blog-list'))) {
+                listContainer.classList.add('show-all');
+                this.style.display = 'none'; 
+            }
         });
     });
-    </script>
+
+    // Event listener untuk logo di header (kembali ke home)
+    headerLogoLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showHomeContent();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // --- Menjalankan Fungsi Saat Halaman Dimuat ---
+    setCopyrightYear();
+    checkUrlForSearch(); // Cek URL untuk pencarian
+    populateNewUpdateSection();
+    generateCategories('#update-games-list', '#game-categories-grid');
+    animateCards();
+});
+</script>
 
 
 
