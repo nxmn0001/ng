@@ -46,83 +46,11 @@
         .sitemap-section h2 { font-size: 1.5em; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
         .sitemap-section h2 i { font-size: 0.9em; width: 35px; height: 35px; display: grid; place-items: center; border-radius: 50%; color: #fff; }
         .sitemap-section.games h2 i { background-color: var(--red-color); }
-        
-        /* === STYLE UNTUK KARTU GAME === */
-        .app-list { 
-            display: grid; 
-            gap: 15px; 
-            grid-template-columns: 1fr; /* Default 1 kolom */
-        }
-        @media (min-width: 768px) {
-            .app-list {
-                grid-template-columns: repeat(2, 1fr); /* 2 kolom di tablet */
-            }
-        }
-        .app-card {
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 12px;
-            box-shadow: 0 4px 12px var(--shadow-color);
-            display: flex;
-            gap: 15px;
-            transition: var(--transition-smooth);
-            align-items: flex-start;
-            text-decoration: none;
-        }
-        .app-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px var(--shadow-color); }
-        .card-image-container {
-            position: relative;
-            flex-shrink: 0;
-            width: 80px;
-            height: 80px;
-        }
-        .card-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-            display: block;
-        }
-        .card-content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .card-title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 5px;
-        }
-        .card-title-row h3 {
-            font-size: 1.05em;
-            font-weight: 600;
-            margin: 0;
-            line-height: 1.3;
-            color: var(--text-color);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 180px;
-        }
-        .card-details {
-            font-size: 0.8em;
-            color: var(--text-color-light);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            line-height: 1.4;
-        }
-        .card-details strong::after {
-            content: ":";
-            margin-left: 2px;
-        }
-        .card-details strong i {
-            margin-right: 5px;
-        }
-
+        .sitemap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+        .sitemap-item a { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 15px; display: block; text-decoration: none; color: var(--text-color); font-weight: 600; box-shadow: 0 2px 5px var(--shadow-color); transition: var(--transition-smooth); }
+        .sitemap-item a:hover { transform: translateY(-5px); box-shadow: 0 6px 15px var(--shadow-color); border-color: var(--blue-color); color: var(--blue-color); }
+        .sitemap-item a:focus, .sitemap-item a:active { outline: none; background-color: transparent; box-shadow: none; border-color: var(--border-color); color: var(--text-color); }
+        a { -webkit-tap-highlight-color: transparent; }
         #loading-message { text-align: center; padding: 40px; font-style: italic; color: var(--text-color-light); }
         .footer-container { background-color: var(--card-bg); border-radius: 16px; padding: 20px; box-shadow: 0 4px 12px var(--shadow-color); margin-top: 50px; }
         .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 0; }
@@ -136,16 +64,15 @@
         .footer-social-icons a { color: var(--text-color-light); font-size: 1.5em; transition: all 0.3s ease; }
         .footer-social-icons a:hover { color: var(--blue-color); transform: scale(1.1); }
         .footer-copyright { text-align: center; font-size: 0.8em; color: var(--text-color-light); padding-top: 15px; border-top: 1px solid var(--border-color); }
-        a { -webkit-tap-highlight-color: transparent; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="header-left">
-            <a href="https://nixygaming.my.id/" class="header-btn" aria-label="Kembali ke Beranda"><i class="fa-solid fa-arrow-left"></i></a>
+            <a href="index.html" class="header-btn" aria-label="Kembali ke Beranda"><i class="fa-solid fa-arrow-left"></i></a>
             <div class="header-logo">
-                <a href="https://nixygaming.my.id/"><img src="https://nixygaming.my.id/navigasi.png" alt="NIXY GAMING"></a>
+                <a href="/"><img src="https://nixygaming.my.id/navigasi.png" alt="NIXY GAMING"></a>
             </div>
         </div>
     </header>
@@ -217,31 +144,16 @@
                         const header = document.createElement('h2');
                         header.innerHTML = `<i class="${iconClass}"></i> ${title}`;
                         section.appendChild(header);
-
                         const grid = document.createElement('div');
-                        grid.className = 'app-list';
-
-                        // === LOGIKA BARU UNTUK MENGHAPUS DUPLIKAT ===
-                        const addedGameBaseNames = new Set(); // Set untuk melacak game yang sudah ditambah
-
+                        grid.className = 'sitemap-grid';
                         items.forEach(item => {
-                            const titleElement = item.querySelector('h3');
-                            if (!titleElement) return; // Lewati jika tidak ada judul
-
-                            const fullTitle = titleElement.textContent;
-                            // Membuat 'nama dasar' dengan menghapus info versi (misal: " v1.2.3")
-                            const baseName = fullTitle.replace(/\s*v[\d\.]+.*$/i, '').trim();
-
-                            // Cek apakah game ini belum ditambahkan
-                            if (!addedGameBaseNames.has(baseName)) {
-                                // Jika belum, tambahkan ke daftar dan ke grid
-                                addedGameBaseNames.add(baseName);
-                                grid.appendChild(item.cloneNode(true));
-                            }
-                            // Jika sudah ada, item ini (versi lama) akan diabaikan
+                            const link = item.getAttribute('href');
+                            const titleText = item.querySelector('h3').textContent;
+                            const gridItem = document.createElement('div');
+                            gridItem.className = 'sitemap-item';
+                            gridItem.innerHTML = `<a href="${link}">${titleText}</a>`;
+                            grid.appendChild(gridItem);
                         });
-                        // === AKHIR LOGIKA BARU ===
-
                         section.appendChild(grid);
                         sitemapContent.appendChild(section);
                     } else {
@@ -249,6 +161,7 @@
                     }
                 };
                 
+                // HANYA MENAMPILKAN BAGIAN GAME
                 createSection('Semua Game', 'fa-solid fa-gamepad', gameItems, 'games');
 
             } catch (error) {
