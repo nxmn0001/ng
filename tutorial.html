@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Download!</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #f0f4f8;      
+            --surface-color: #ffffff;   
+            --primary-color: #3b82f6;   
+            --primary-hover: #60a5fa;   
+            --text-color: #1f2937;     
+            --text-muted: #6b7280;      
+            --border-color: #e5e7eb;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--surface-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;  
+        }
+        
+        /* [BARU] Wrapper untuk banner dan header agar header bisa melayang */
+        .header-banner-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .banner-container {
+            width: 100%;
+            line-height: 0; /* Menghilangkan spasi bawah pada gambar */
+        }
+
+        .banner-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* [DIUBAH TOTAL] Header Navigasi sekarang melayang */
+        .app-header {
+            position: absolute;
+            top: 20px; /* Jarak dari atas */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 550px;
+            z-index: 10;
+
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            
+            /* Efek Kaca (Glassmorphism) */
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .logo {
+            width: 40px; height: 40px; border-radius: 8px;
+            margin-right: 15px; overflow: hidden;
+            background-color: var(--border-color);
+            flex-shrink: 0;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .logo img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .app-header h1 {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: var(--text-color);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Sistem Navigasi Tab */
+        .tab-nav {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            background-color: #f9fafb;
+        }
+
+        .tab-button {
+            flex: 1; padding: 15px 20px; font-size: 1rem;
+            font-weight: 600; text-align: center; cursor: pointer;
+            background: none; border: none; color: var(--text-muted);
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .tab-button:hover { background-color: #f3f4f6; color: var(--text-color); }
+        .tab-button.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
+
+        .tab-content { padding: 30px; }
+        .tab-panel { display: none; animation: fadeIn 0.5s ease; }
+        .tab-panel.active { display: block; }
+        
+        .video-responsive {
+            position: relative; padding-bottom: 56.25%; height: 0;
+            overflow: hidden; border-radius: 12px;
+            background-color: #000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-responsive iframe,
+        .video-responsive video {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; border: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .main-container { border-radius: 12px; }
+            .app-header { padding: 10px 15px; top: 15px; }
+            .logo { width: 35px; height: 35px; margin-right: 12px;}
+            .app-header h1 { font-size: 1.2em; }
+            .tab-content { padding: 20px; }
+            .tab-button { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        
+        <div class="header-banner-wrapper">
+
+            <div class="banner-container">
+                <img src="https://nixygaming.my.id/nixygaming.jpg" alt="NIXYGAMING">
+            </div>
+        </div>
+        
+        <div class="tab-nav">
+            <button class="tab-button active" data-tab="v1">Versi - 1</button>
+            <button class="tab-button" data-tab="v2">Versi - 2</button>
+        </div>
+        
+        <div class="tab-content">
+            <div id="v1" class="tab-panel active">
+                <div class="video-responsive">
+                    <video controls preload="metadata" playsinline>
+                        <source src="https://github.com/nxmn0001/test/raw/refs/heads/main/InShot_20250914_212045938.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung tag video.
+                    </video>
+                </div>
+            </div>
+            
+            <div id="v2" class="tab-panel">
+                <div class="video-responsive">
+                    <iframe
+                        src="https://www.youtube.com/embed/BiinrNRh17Q"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // SCRIPT HANYA UNTUK TAB, tidak ada lagi script popup
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabNav = document.querySelector('.tab-nav');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+            const tabButtons = document.querySelectorAll('.tab-button');
+
+            tabNav.addEventListener('click', (e) => {
+                if (e.target.matches('.tab-button')) {
+                    const tabId = e.target.dataset.tab;
+                    const targetPanel = document.getElementById(tabId);
+
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanels.forEach(panel => panel.classList.remove('active'));
+
+                    e.target.classList.add('active');
+                    if (targetPanel) {
+                        targetPanel.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
