@@ -267,6 +267,7 @@
             text-align: center; 
             padding: 50px 0; 
             color: var(--secondary-text-color);
+            grid-column: 1 / -1; /* Agar posisi selalu di tengah grid */
         }
         #no-results-message p { margin: 10px 0 20px 0; }
         
@@ -382,11 +383,125 @@
 
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <header class="main-header"></header>
+    <header class="main-header">
+        <div class="container">
+            <div class="navbar" id="navbar">
+                <div class="header-main-view">
+                    <div class="logo">Flix<span>ora</span></div>
+                    <nav class="desktop-nav">
+                        <ul class="nav-menu">
+                            <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Browse <i data-lucide="chevron-down" style="width:16px;"></i></a>
+                                <ul class="dropdown">
+                                    <li class="dropdown-item"><a href="#">Movies</a></li>
+                                    <li class="dropdown-item"><a href="#">Series</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item"><a href="#" class="nav-link">My List</a></li>
+                        </ul>
+                    </nav>
+                    <div class="nav-right">
+                        <a href="#" target="_blank" class="action-button" aria-label="Join Telegram"><i data-lucide="send"></i></a>
+                        <button class="action-button" id="theme-toggle-btn" aria-label="Toggle Theme">
+                            <i class="icon-sun" data-lucide="sun"></i>
+                            <i class="icon-moon" data-lucide="moon" style="display: none;"></i>
+                        </button>
+                        <button class="action-button" id="search-open-btn" aria-label="Open Search"><i data-lucide="search"></i></button>
+                        <button class="action-button mobile-menu-toggle" aria-label="Open Menu"><i data-lucide="menu"></i></button>
+                    </div>
+                </div>
+                <div class="header-search-view">
+                    <button class="action-button" id="search-close-btn" aria-label="Close Search"><i data-lucide="arrow-left"></i></button>
+                    <input type="text" id="search-input" placeholder="Search title...">
+                </div>
+            </div>
+        </div>
+        <div class="mobile-nav" id="mobile-menu">
+             <ul class="nav-menu">
+                <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Movies</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Series</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">My List</a></li>
+            </ul>
+        </div>
+    </header>
 
-    <main></main>
+    <main>
+        <div class="container">
+            <section class="hero-section">
+                <h1 class="hero-title">Selamat Datang di Website Flix<span>ora</span></h1>
+                <p class="hero-description">Temukan ribuan film, serial TV, drama, dan aksi terbaru kapan saja dan di mana saja.</p>
+                <div class="hero-buttons">
+                    <a href="#" target="_blank" class="hero-btn secondary">
+                        <i data-lucide="send"></i>
+                        Gabung Telegram
+                    </a>
+                    <a href="#content-grid" class="hero-btn primary">
+                        <i data-lucide="play"></i>
+                        Mulai Nonton
+                    </a>
+                </div>
+            </section>
+            
+            <div class="content-grid" id="content-grid">
+                 <div id="no-results-message">
+                    <h3>No results found</h3>
+                    <p>Can't find what you're looking for?</p>
+                    <a href="#" class="request-btn">Request Content</a>
+                </div>
+                <div class="thumbnail-card" data-title="Galactic Frontiers"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Galactic Frontiers</h3></div></div>
+                <div class="thumbnail-card" data-title="The Chef's Secret"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Chef's Secret</h3></div></div>
+                <div class="thumbnail-card" data-title="Echoes of the Past"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Echoes of the Past</h3></div></div>
+                <div class="thumbnail-card" data-title="City of Neon"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">City of Neon</h3></div></div>
+                <div class="thumbnail-card" data-title="Mountain Siege"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Mountain Siege</h3></div></div>
+                <div class="thumbnail-card" data-title="Project Chronos"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Project Chronos</h3></div></div>
+                <div class="thumbnail-card" data-title="Wild Savanna"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Wild Savanna</h3></div></div>
+                <div class="thumbnail-card" data-title="The Last Joke"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Last Joke</h3></div></div>
+                <div class="thumbnail-card" data-title="Cyber Dreams"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Cyber Dreams</h3></div></div>
+                <div class="thumbnail-card" data-title="Ocean's Heart"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Ocean's Heart</h3></div></div>
+                <div class="thumbnail-card" data-title="Desert Fury"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Desert Fury</h3></div></div>
+                <div class="thumbnail-card" data-title="The Final Voyage"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Final Voyage</h3></div></div>
+                <div class="thumbnail-card" data-title="Galaxy Wanderers"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Galaxy Wanderers</h3></div></div>
+                <div class="thumbnail-card" data-title="AI Uprising"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">AI Uprising</h3></div></div>
+                <div class="thumbnail-card" data-title="Neptune's Children"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Neptune's Children</h3></div></div>
+                <div class="thumbnail-card" data-title="Mars Colony One"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Mars Colony One</h3></div></div>
+                <div class="thumbnail-card" data-title="The Inheritance"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Inheritance</h3></div></div>
+                <div class="thumbnail-card" data-title="Lost City of Gold"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Lost City of Gold</h3></div></div>
+                <div class="thumbnail-card" data-title="Paris in Summer"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Paris in Summer</h3></div></div>
+                <div class="thumbnail-card" data-title="Dimension Drift"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Dimension Drift</h3></div></div>
+                <div class="thumbnail-card" data-title="Galactic Frontiers"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Galactic Frontiers</h3></div></div>
+                <div class="thumbnail-card" data-title="The Chef's Secret"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Chef's Secret</h3></div></div>
+                <div class="thumbnail-card" data-title="Echoes of the Past"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Echoes of the Past</h3></div></div>
+                <div class="thumbnail-card" data-title="City of Neon"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">City of Neon</h3></div></div>
+                <div class="thumbnail-card" data-title="Mountain Siege"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Mountain Siege</h3></div></div>
+                <div class="thumbnail-card" data-title="Project Chronos"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Project Chronos</h3></div></div>
+                <div class="thumbnail-card" data-title="Wild Savanna"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Wild Savanna</h3></div></div>
+                <div class="thumbnail-card" data-title="The Last Joke"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Last Joke</h3></div></div>
+                <div class="thumbnail-card" data-title="Cyber Dreams"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Cyber Dreams</h3></div></div>
+                <div class="thumbnail-card" data-title="Ocean's Heart"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Ocean's Heart</h3></div></div>
+                <div class="thumbnail-card" data-title="Desert Fury"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Desert Fury</h3></div></div>
+                <div class="thumbnail-card" data-title="The Final Voyage"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Final Voyage</h3></div></div>
+                <div class="thumbnail-card" data-title="Galaxy Wanderers"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Galaxy Wanderers</h3></div></div>
+                <div class="thumbnail-card" data-title="AI Uprising"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">AI Uprising</h3></div></div>
+                <div class="thumbnail-card" data-title="Neptune's Children"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Neptune's Children</h3></div></div>
+                <div class="thumbnail-card" data-title="Mars Colony One"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Mars Colony One</h3></div></div>
+                <div class="thumbnail-card" data-title="The Inheritance"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Inheritance</h3></div></div>
+                <div class="thumbnail-card" data-title="Lost City of Gold"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Lost City of Gold</h3></div></div>
+                <div class="thumbnail-card" data-title="Paris in Summer"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Paris in Summer</h3></div></div>
+            </div>
+            
+            <div class="load-more-container" id="load-more-container">
+                <button class="load-more-btn" id="load-more-btn">Lihat Lainnya</button>
+            </div>
+        </div>
+    </main>
     
-    <footer class="main-footer"></footer>
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; <span id="copyright-year"></span> <span id="copyright-name"></span>. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <button id="scroll-to-top-btn" aria-label="Scroll to top">
         <i data-lucide="arrow-up"></i>
@@ -396,21 +511,38 @@
         lucide.createIcons();
         
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Deklarasi Semua Variabel ---
             const navbar = document.getElementById('navbar');
             const searchInput = document.getElementById('search-input');
-            // ... (semua deklarasi variabel const lainnya tetap sama)
+            const searchOpenBtn = document.getElementById('search-open-btn');
+            const searchCloseBtn = document.getElementById('search-close-btn');
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const contentCards = document.querySelectorAll('.thumbnail-card');
+            const noResultsMessage = document.getElementById('no-results-message');
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const sunIcon = themeToggleBtn.querySelector('.icon-sun');
+            const moonIcon = themeToggleBtn.querySelector('.icon-moon');
+            const yearSpan = document.getElementById('copyright-year');
+            const nameSpan = document.getElementById('copyright-name');
+            const logoName = document.querySelector('.logo').textContent;
+            const loadMoreContainer = document.getElementById('load-more-container');
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
             const heroSection = document.querySelector('.hero-section');
             let currentlyVisible = 10;
+            
+            /* --- FITUR BARU DIMULAI --- */
 
-            // --- [UPGRADE] Anti Klik Kanan ---
+            // 1. Anti Klik Kanan
             document.addEventListener('contextmenu', event => event.preventDefault());
 
-            // --- [UPGRADE] Deteksi AdBlock Berlapis ---
+            // 2. Deteksi AdBlock Berlapis (Lebih Kuat)
             const adBlockOverlay = document.getElementById('adblock-overlay');
             let isAdBlockerDetected = false;
 
             const showAdBlockerMessage = () => {
-                if (isAdBlockerDetected) return; // Mencegah fungsi berjalan berkali-kali
+                if (isAdBlockerDetected) return; 
                 isAdBlockerDetected = true;
                 adBlockOverlay.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
@@ -418,23 +550,20 @@
 
             const checkAdBlock = () => {
                 // Metode 1: Jebakan Jaringan (Sangat Efektif)
-                // Mencoba mengambil skrip iklan yang pasti ada di semua daftar blokir.
                 fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", {
                     method: 'HEAD',
                     mode: 'no-cors'
                 })).catch(err => {
-                    // Jika permintaan gagal total, itu adalah tanda pasti pemblokiran.
                     showAdBlockerMessage();
                 });
 
                 // Metode 2: Elemen Umpan (Sebagai Cadangan)
                 const bait = document.createElement('div');
                 bait.innerHTML = '&nbsp;';
-                bait.className = 'ad adsbox banner-ad text-ad ad-container'; // Menggunakan banyak kelas umum
+                bait.className = 'ad adsbox banner-ad text-ad ad-container';
                 bait.style.cssText = 'position:absolute; left:-9999px; height:1px; width:1px; visibility:hidden; pointer-events:none;';
                 document.body.appendChild(bait);
                 
-                // Cek setelah render frame berikutnya
                 requestAnimationFrame(() => {
                     if (bait.offsetHeight === 0 || bait.offsetParent === null) {
                          showAdBlockerMessage();
@@ -444,18 +573,17 @@
             };
             
             checkAdBlock();
-            // ------------------------------------------
 
-            // Sisa kode JavaScript Anda (logika footer, tema, pencarian, dll.) tetap sama
-            const yearSpan = document.getElementById('copyright-year');
-            const nameSpan = document.getElementById('copyright-name');
-            const logoName = document.querySelector('.logo').textContent;
+            /* --- FITUR BARU SELESAI --- */
+
+
+            // --- SEMUA FUNGSI LAMA (UTUH KEMBALI) ---
+
+            // Logika Footer Otomatis
             yearSpan.textContent = new Date().getFullYear();
             nameSpan.textContent = logoName;
 
-            const themeToggleBtn = document.getElementById('theme-toggle-btn');
-            const sunIcon = themeToggleBtn.querySelector('.icon-sun');
-            const moonIcon = themeToggleBtn.querySelector('.icon-moon');
+            // Logika Mode Gelap & Terang
             const applyTheme = (theme) => {
                 if (theme === 'dark') {
                     document.body.classList.add('dark-mode');
@@ -475,10 +603,76 @@
                 applyTheme(newTheme);
                 localStorage.setItem('theme', newTheme);
             });
-            
-            // ... (Salin dan tempel sisa kode JavaScript Anda dari sini)
 
+            // Logika Pencarian
+            searchOpenBtn.addEventListener('click', () => navbar.classList.add('search-active'));
+            searchCloseBtn.addEventListener('click', () => {
+                navbar.classList.remove('search-active');
+                searchInput.value = '';
+                filterContent(); 
+            });
+
+            // Logika Menu Mobile
+            mobileMenuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+            
+            // Logika Filter & Tampilan Kartu
+            const updateCardVisibility = () => {
+                const query = searchInput.value.toLowerCase().trim();
+                const allCards = Array.from(contentCards);
+                let visibleCardsCount = 0;
+
+                heroSection.style.display = query ? 'none' : 'block';
+                allCards.forEach(card => card.style.display = 'none');
+
+                if (query) {
+                    allCards.forEach(card => {
+                        const title = card.dataset.title.toLowerCase();
+                        if (title.includes(query)) {
+                            card.style.display = 'block'; 
+                            visibleCardsCount++;
+                        }
+                    });
+                    loadMoreContainer.style.display = 'none';
+                } else {
+                    allCards.slice(0, currentlyVisible).forEach(card => {
+                        card.style.display = 'block';
+                        visibleCardsCount++;
+                    });
+                    loadMoreContainer.style.display = currentlyVisible >= allCards.length ? 'none' : 'block';
+                }
+                
+                noResultsMessage.style.display = (visibleCardsCount === 0 && query) ? 'block' : 'none';
+            };
+            
+            const filterContent = () => {
+                if (!searchInput.value.toLowerCase().trim()) {
+                   currentlyVisible = 10; 
+                }
+                updateCardVisibility();
+            };
+            searchInput.addEventListener('input', filterContent);
+
+            // Logika Tombol "Lihat Lainnya"
+            loadMoreBtn.addEventListener('click', () => {
+                currentlyVisible += 10;
+                updateCardVisibility();
+            });
+
+            // Logika Tombol "Scroll ke Atas"
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            });
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Tampilkan kartu awal saat halaman dimuat
+            updateCardVisibility();
         });
     </script>
-    </body>
+</body>
 </html>
