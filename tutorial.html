@@ -7,23 +7,25 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         :root {
-            --bg-color: #f0f4f8;      
-            --surface-color: #ffffff;   
-            --primary-color: #3b82f6;   
-            --primary-hover: #60a5fa;   
-            --text-color: #1f2937;     
-            --text-muted: #6b7280;      
-            --border-color: #e5e7eb;
+            --bg-color: #f7faff;
+            --surface-color: #ffffff;
+            --primary-color: #007bff;
+            --primary-hover: #0056b3;
+            --text-color: #1a202c;
+            --text-muted: #6c757d;
+            --border-color: #dee2e6;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Russo One', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             display: flex;
@@ -31,95 +33,97 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
         }
 
         .main-container {
             width: 100%;
-            max-width: 900px;
+            max-width: 850px;
             background-color: var(--surface-color);
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;  
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 30, 80, 0.08);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
         
-        /* [BARU] Wrapper untuk banner dan header agar header bisa melayang */
-        .header-banner-wrapper {
-            position: relative;
-            width: 100%;
-        }
-
-        .banner-container {
-            width: 100%;
-            line-height: 0; /* Menghilangkan spasi bawah pada gambar */
-        }
-
-        .banner-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* [DIUBAH TOTAL] Header Navigasi sekarang melayang */
         .app-header {
-            position: absolute;
-            top: 20px; /* Jarak dari atas */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 550px;
-            z-index: 10;
-
             display: flex;
             align-items: center;
-            padding: 12px 20px;
-            
-            /* Efek Kaca (Glassmorphism) */
-            background-color: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
         }
         
         .logo {
-            width: 40px; height: 40px; border-radius: 8px;
-            margin-right: 15px; overflow: hidden;
-            background-color: var(--border-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            overflow: hidden;
             flex-shrink: 0;
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            border: 2px solid var(--primary-color);
         }
 
-        .logo img { width: 100%; height: 100%; object-fit: cover; }
+        .logo img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            pointer-events: none;
+        }
         
         .app-header h1 {
             font-size: 1.5em;
-            font-weight: 600;
             color: var(--text-color);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 0.5px;
         }
 
-        /* Sistem Navigasi Tab */
         .tab-nav {
             display: flex;
+            padding: 8px;
+            gap: 8px;
+            background-color: #f0f4f9;
             border-bottom: 1px solid var(--border-color);
-            background-color: #f9fafb;
         }
-
+        
         .tab-button {
-            flex: 1; padding: 15px 20px; font-size: 1rem;
-            font-weight: 600; text-align: center; cursor: pointer;
-            background: none; border: none; color: var(--text-muted);
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s ease-in-out;
+            flex: 1;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            text-align: center;
+            cursor: pointer;
+            background-color: transparent;
+            color: var(--text-muted);
+            border: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            outline: none;
+            letter-spacing: 0.5px;
+            
+            /* [FIX] Kode ini khusus untuk menghilangkan kotak putih/abu-abu saat disentuh di browser mobile */
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .tab-button:hover { background-color: #f3f4f6; color: var(--text-color); }
-        .tab-button.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
+        .tab-button:hover {
+             color: var(--primary-hover);
+        }
+        .tab-button.active {
+             background-color: var(--primary-color);
+             color: #ffffff;
+             box-shadow: 0 4px 12px rgba(0, 123, 255, 0.25);
+        }
 
-        .tab-content { padding: 30px; }
+        .tab-content { padding: 25px; }
         .tab-panel { display: none; animation: fadeIn 0.5s ease; }
         .tab-panel.active { display: block; }
         
@@ -143,28 +147,29 @@
 
         @media (max-width: 600px) {
             body { padding: 10px; }
-            .main-container { border-radius: 12px; }
-            .app-header { padding: 10px 15px; top: 15px; }
-            .logo { width: 35px; height: 35px; margin-right: 12px;}
-            .app-header h1 { font-size: 1.2em; }
+            .main-container { border-radius: 15px; }
+            .app-header { padding: 15px; }
+            .logo { width: 35px; height: 35px; margin-right: 12px; }
+            .app-header h1 { font-size: 1.2em; gap: 10px; }
+            .tab-nav { padding: 6px; gap: 6px; }
+            .tab-button { font-size: 0.9rem; padding: 10px; border-radius: 10px; }
             .tab-content { padding: 20px; }
-            .tab-button { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
     <div class="main-container">
         
-        <div class="header-banner-wrapper">
-
-            <div class="banner-container">
-                <img src="https://nixygaming.my.id/nixygaming.jpg" alt="NIXYGAMING">
+        <header class="app-header">
+            <div class="logo">
+                <img src="https://nixygaming.my.id/nixygaming.jpg" alt="Logo">
             </div>
-        </div>
+            <h1><b>TUTORIAL Download</b></h1>
+        </header>
         
         <div class="tab-nav">
-            <button class="tab-button active" data-tab="v1">Versi - 1</button>
-            <button class="tab-button" data-tab="v2">Versi - 2</button>
+            <button class="tab-button active" data-tab="v1"><i class="fa-solid fa-server"></i> <i class="fa-solid fa-1"></i></button>
+            <button class="tab-button" data-tab="v2"><i class="fa-brands fa-youtube"></i> <i class="fa-solid fa-2"></i></button>
         </div>
         
         <div class="tab-content">
@@ -191,21 +196,21 @@
     </div>
 
     <script>
-        // SCRIPT HANYA UNTUK TAB, tidak ada lagi script popup
         document.addEventListener('DOMContentLoaded', () => {
             const tabNav = document.querySelector('.tab-nav');
             const tabPanels = document.querySelectorAll('.tab-panel');
             const tabButtons = document.querySelectorAll('.tab-button');
 
             tabNav.addEventListener('click', (e) => {
-                if (e.target.matches('.tab-button')) {
-                    const tabId = e.target.dataset.tab;
+                const button = e.target.closest('.tab-button');
+                if (button) {
+                    const tabId = button.dataset.tab;
                     const targetPanel = document.getElementById(tabId);
 
                     tabButtons.forEach(btn => btn.classList.remove('active'));
                     tabPanels.forEach(panel => panel.classList.remove('active'));
 
-                    e.target.classList.add('active');
+                    button.classList.add('active');
                     if (targetPanel) {
                         targetPanel.classList.add('active');
                     }
