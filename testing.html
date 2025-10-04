@@ -38,7 +38,7 @@
         }
 
         html {
-            scroll-behavior: smooth; /* Penting untuk scroll ke atas */
+            scroll-behavior: smooth;
         }
 
         body {
@@ -68,7 +68,7 @@
         *:focus, *:focus-visible {
             outline: none;
         }
-        .action-button:focus-visible {
+        .action-button:focus-visible, .hero-btn:focus-visible {
             box-shadow: 0 0 0 3px var(--accent-glow);
         }
         #search-input:focus {
@@ -165,6 +165,81 @@
          .mobile-nav .nav-item:last-child .nav-link { border-bottom: none; }
 
         main { padding: 40px 0; }
+
+        .hero-section {
+            text-align: center;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--primary-text-color);
+        }
+        .hero-title span {
+            color: var(--accent-color);
+        }
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--secondary-text-color);
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .hero-btn.primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        .hero-btn.primary:hover {
+            background-color: #2563EB;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+        .hero-btn.secondary {
+            background-color: var(--surface-color);
+            color: var(--primary-text-color);
+            border: 1px solid var(--border-color);
+        }
+        .hero-btn.secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .hero-section { padding: 40px 0; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-btn {
+                padding: 10px 16px;
+                font-size: 0.9rem; 
+                gap: 6px;
+            }
+        }
+        
+        #content-grid {
+            scroll-margin-top: 90px; 
+        }
+        
         .content-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
         @media (min-width: 768px) { .content-grid { grid-template-columns: repeat(4, 1fr); } }
         @media (min-width: 1024px) { .content-grid { grid-template-columns: repeat(6, 1fr); } }
@@ -186,13 +261,18 @@
 
         .card-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 2.5rem 1rem 1rem 1rem; background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%); }
         .card-title { font-size: 1.1rem; font-weight: 700; color: #FFFFFF; }
-        #no-results-message { display: none; text-align: center; grid-column: 1 / -1; padding: 50px; color: var(--secondary-text-color); }
+        
+        #no-results-message { 
+            display: none; 
+            text-align: center; 
+            padding: 50px 0; 
+            color: var(--secondary-text-color);
+        }
         #no-results-message p { margin: 10px 0 20px 0; }
         
         .request-btn { display: inline-block; background-color: var(--accent-color); color: white; border: none; padding: 12px 25px; font-size: 1rem; font-weight: 600; border-radius: 25px; cursor: pointer; transition: background-color 0.2s; text-decoration: none; }
         .request-btn:hover { background-color: #2563EB; }
 
-        /* [BARU] Styling untuk Tombol "Lihat Lainnya" */
         .load-more-container {
             text-align: center;
             margin-top: 40px;
@@ -215,7 +295,6 @@
              box-shadow: 0 0 0 3px var(--accent-glow);
         }
 
-        /* [BARU] Styling untuk Tombol "Scroll ke Atas" */
         #scroll-to-top-btn {
             position: fixed;
             bottom: 30px;
@@ -231,7 +310,6 @@
             justify-content: center;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            /* Sembunyikan secara default */
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
@@ -252,9 +330,56 @@
             border-top: 1px solid var(--border-color);
             margin-top: 40px;
         }
+
+        /* [BARU] Styling untuk AdBlock Blocker */
+        #adblock-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 99999;
+            display: none; /* Sembunyikan secara default */
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 20px;
+        }
+        .adblock-modal {
+            max-width: 450px;
+        }
+        .adblock-icon {
+            width: 80px;
+            height: 80px;
+            stroke-width: 1.5;
+            margin-bottom: 20px;
+            color: #F87171; /* Warna merah sebagai aksen */
+        }
+        .adblock-modal h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .adblock-modal p {
+            font-size: 1.1rem;
+            color: #E5E7EB;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
+
+    <div id="adblock-overlay">
+        <div class="adblock-modal">
+            <i data-lucide="shield-off" class="adblock-icon"></i>
+            <h2>AdBlock Terdeteksi</h2>
+            <p>Situs ini didukung oleh iklan. Mohon matikan pemblokir iklan Anda untuk melanjutkan.</p>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -304,12 +429,29 @@
 
     <main>
         <div class="container">
-            <div class="content-grid" id="content-grid">
-                <div id="no-results-message">
-                    <h3>No results found</h3>
-                    <p>Can't find what you're looking for?</p>
-                    <a href="#" class="request-btn">Request Content</a>
+            
+            <section class="hero-section">
+                <h1 class="hero-title">Selamat Datang di Website Flix<span>ora</span></h1>
+                <p class="hero-description">Temukan ribuan film, serial TV, drama, dan aksi terbaru kapan saja dan di mana saja.</p>
+                <div class="hero-buttons">
+                    <a href="#" target="_blank" class="hero-btn secondary">
+                        <i data-lucide="send"></i>
+                        Gabung Telegram
+                    </a>
+                    <a href="#content-grid" class="hero-btn primary">
+                        <i data-lucide="play"></i>
+                        Mulai Nonton
+                    </a>
                 </div>
+            </section>
+
+            <div id="no-results-message">
+                <h3>No results found</h3>
+                <p>Can't find what you're looking for?</p>
+                <a href="#" class="request-btn">Request Content</a>
+            </div>
+
+            <div class="content-grid" id="content-grid">
                 <div class="thumbnail-card" data-title="Galactic Frontiers"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Galactic Frontiers</h3></div></div>
                 <div class="thumbnail-card" data-title="The Chef's Secret"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Chef's Secret</h3></div></div>
                 <div class="thumbnail-card" data-title="Echoes of the Past"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Echoes of the Past</h3></div></div>
@@ -330,6 +472,25 @@
                 <div class="thumbnail-card" data-title="Lost City of Gold"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Lost City of Gold</h3></div></div>
                 <div class="thumbnail-card" data-title="Paris in Summer"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Paris in Summer</h3></div></div>
                 <div class="thumbnail-card" data-title="Dimension Drift"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Dimension Drift</h3></div></div>
+                <div class="thumbnail-card" data-title="Galactic Frontiers"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Galactic Frontiers</h3></div></div>
+                <div class="thumbnail-card" data-title="The Chef's Secret"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Chef's Secret</h3></div></div>
+                <div class="thumbnail-card" data-title="Echoes of the Past"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Echoes of the Past</h3></div></div>
+                <div class="thumbnail-card" data-title="City of Neon"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">City of Neon</h3></div></div>
+                <div class="thumbnail-card" data-title="Mountain Siege"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Mountain Siege</h3></div></div>
+                <div class="thumbnail-card" data-title="Project Chronos"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Project Chronos</h3></div></div>
+                <div class="thumbnail-card" data-title="Wild Savanna"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Wild Savanna</h3></div></div>
+                <div class="thumbnail-card" data-title="The Last Joke"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Last Joke</h3></div></div>
+                <div class="thumbnail-card" data-title="Cyber Dreams"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Cyber Dreams</h3></div></div>
+                <div class="thumbnail-card" data-title="Ocean's Heart"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Ocean's Heart</h3></div></div>
+                <div class="thumbnail-card" data-title="Desert Fury"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Desert Fury</h3></div></div>
+                <div class="thumbnail-card" data-title="The Final Voyage"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Final Voyage</h3></div></div>
+                <div class="thumbnail-card" data-title="Galaxy Wanderers"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Galaxy Wanderers</h3></div></div>
+                <div class="thumbnail-card" data-title="AI Uprising"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">AI Uprising</h3></div></div>
+                <div class="thumbnail-card" data-title="Neptune's Children"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Neptune's Children</h3></div></div>
+                <div class="thumbnail-card" data-title="Mars Colony One"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Mars Colony One</h3></div></div>
+                <div class="thumbnail-card" data-title="The Inheritance"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Inheritance</h3></div></div>
+                <div class="thumbnail-card" data-title="Lost City of Gold"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Lost City of Gold</h3></div></div>
+                <div class="thumbnail-card" data-title="Paris in Summer"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Paris in Summer</h3></div></div>
             </div>
             
             <div class="load-more-container" id="load-more-container">
@@ -367,18 +528,42 @@
             const nameSpan = document.getElementById('copyright-name');
             const logoName = document.querySelector('.logo').textContent;
             
-            // --- [BARU] Elemen untuk Fitur Baru ---
             const loadMoreContainer = document.getElementById('load-more-container');
             const loadMoreBtn = document.getElementById('load-more-btn');
             const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+            const heroSection = document.querySelector('.hero-section');
             let currentlyVisible = 10;
-            // -------------------------------------
 
-            // --- Logika Footer Otomatis ---
+            // --- [BARU] Anti Klik Kanan ---
+            document.addEventListener('contextmenu', event => event.preventDefault());
+
+            // --- [BARU] Deteksi AdBlock "Mode Dewa" ---
+            const adBlockOverlay = document.getElementById('adblock-overlay');
+            const detectAdBlock = () => {
+                const bait = document.createElement('div');
+                bait.innerHTML = '&nbsp;';
+                bait.className = 'adsbox'; // Kelas umum yang sering diblokir AdBlocker
+                bait.style.cssText = 'position:absolute; left:-9999px; height:1px; width:1px;';
+                document.body.appendChild(bait);
+
+                setTimeout(() => {
+                    // Jika tinggi elemen 0, berarti disembunyikan AdBlocker
+                    if (!bait.offsetHeight) {
+                        adBlockOverlay.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    }
+                    // Hapus elemen umpan dari DOM
+                    document.body.removeChild(bait);
+                }, 100);
+            };
+            
+            // Jalankan deteksi setelah halaman dimuat
+            detectAdBlock();
+            // ------------------------------------------
+
             yearSpan.textContent = new Date().getFullYear();
             nameSpan.textContent = logoName;
 
-            // --- Logika Mode Gelap & Terang ---
             const applyTheme = (theme) => {
                 if (theme === 'dark') {
                     document.body.classList.add('dark-mode');
@@ -399,55 +584,49 @@
                 localStorage.setItem('theme', newTheme);
             });
 
-            // --- Logika Pencarian ---
             searchOpenBtn.addEventListener('click', () => navbar.classList.add('search-active'));
             searchCloseBtn.addEventListener('click', () => {
                 navbar.classList.remove('search-active');
                 searchInput.value = '';
-                filterContent();
+                filterContent(); 
             });
 
-            // --- Logika Menu Mobile ---
             mobileMenuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
             
-            // --- [DI-UPGRADE] Logika Filter & Tampilan Kartu ---
             const updateCardVisibility = () => {
-                const query = searchInput.value.toLowerCase();
+                const query = searchInput.value.toLowerCase().trim();
                 const allCards = Array.from(contentCards);
                 let visibleCardsCount = 0;
 
-                // Sembunyikan semua kartu terlebih dahulu
+                heroSection.style.display = query ? 'none' : 'block';
+
                 allCards.forEach(card => card.style.display = 'none');
 
                 if (query) {
-                    // Jika ada pencarian, tampilkan semua yang cocok
                     allCards.forEach(card => {
                         const title = card.dataset.title.toLowerCase();
                         if (title.includes(query)) {
-                            card.style.display = 'block';
+                            card.style.display = 'block'; 
                             visibleCardsCount++;
                         }
                     });
-                    loadMoreContainer.style.display = 'none'; // Sembunyikan tombol saat mencari
+                    loadMoreContainer.style.display = 'none';
                 } else {
-                    // Jika tidak ada pencarian, tampilkan sejumlah `currentlyVisible`
                     allCards.slice(0, currentlyVisible).forEach(card => {
                         card.style.display = 'block';
                         visibleCardsCount++;
                     });
-                    // Tampilkan atau sembunyikan tombol "Load More"
                     loadMoreContainer.style.display = currentlyVisible >= allCards.length ? 'none' : 'block';
                 }
-                noResultsMessage.style.display = visibleCardsCount === 0 ? 'block' : 'none';
+                
+                noResultsMessage.style.display = (visibleCardsCount === 0 && query) ? 'block' : 'none';
             };
             
-            // --- [BARU] Event Listener untuk Tombol "Lihat Lainnya" ---
             loadMoreBtn.addEventListener('click', () => {
                 currentlyVisible += 10;
                 updateCardVisibility();
             });
 
-            // --- [BARU] Event Listener untuk "Scroll ke Atas" ---
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 400) {
                     scrollToTopBtn.classList.add('visible');
@@ -459,14 +638,14 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
             
-            // --- Logika Filter Konten ---
             const filterContent = () => {
-                currentlyVisible = 10; // Reset jumlah saat memulai pencarian baru
+                if (!searchInput.value.toLowerCase().trim()) {
+                   currentlyVisible = 10; 
+                }
                 updateCardVisibility();
             };
             searchInput.addEventListener('input', filterContent);
 
-            // Tampilkan kartu awal saat halaman dimuat
             updateCardVisibility();
         });
     </script>
