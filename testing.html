@@ -37,6 +37,10 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        html {
+            scroll-behavior: smooth; /* Penting untuk scroll ke atas */
+        }
+
         body {
             background-color: var(--surface-color);
             color: var(--primary-text-color);
@@ -165,9 +169,8 @@
         @media (min-width: 768px) { .content-grid { grid-template-columns: repeat(4, 1fr); } }
         @media (min-width: 1024px) { .content-grid { grid-template-columns: repeat(6, 1fr); } }
 
-        .thumbnail-card { background-color: var(--bg-color); border-radius: 12px; overflow: hidden; position: relative; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease; display: block; }
-        .thumbnail-card:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.1); z-index: 10; }
-        .thumbnail-card:focus-visible { box-shadow: 0 0 0 3px var(--accent-glow); }
+        .thumbnail-card { background-color: var(--bg-color); border-radius: 12px; overflow: hidden; position: relative; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease; }
+        .thumbnail-card:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.1); z-index: 10; cursor: pointer; }
 
         .thumbnail-image {
             width: 100%;
@@ -188,6 +191,58 @@
         
         .request-btn { display: inline-block; background-color: var(--accent-color); color: white; border: none; padding: 12px 25px; font-size: 1rem; font-weight: 600; border-radius: 25px; cursor: pointer; transition: background-color 0.2s; text-decoration: none; }
         .request-btn:hover { background-color: #2563EB; }
+
+        /* [BARU] Styling untuk Tombol "Lihat Lainnya" */
+        .load-more-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .load-more-btn {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--primary-text-color);
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .load-more-btn:hover {
+            background-color: var(--border-color);
+        }
+        .load-more-btn:focus-visible {
+             box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        /* [BARU] Styling untuk Tombol "Scroll ke Atas" */
+        #scroll-to-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            /* Sembunyikan secara default */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+            z-index: 1000;
+        }
+        #scroll-to-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
 
         .main-footer {
             padding: 40px 0 20px 0;
@@ -255,10 +310,30 @@
                     <p>Can't find what you're looking for?</p>
                     <a href="#" class="request-btn">Request Content</a>
                 </div>
-                <a href="#" class="thumbnail-card" data-title="Galactic Frontiers"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Galactic Frontiers</h3></div></a>
-                <a href="#" class="thumbnail-card" data-title="The Chef's Secret"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Chef's Secret</h3></div></a>
-                <a href="#" class="thumbnail-card" data-title="Echoes of the Past"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Echoes of the Past</h3></div></a>
-                <a href="#" class="thumbnail-card" data-title="City of Neon"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">City of Neon</h3></div></a>
+                <div class="thumbnail-card" data-title="Galactic Frontiers"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Galactic Frontiers</h3></div></div>
+                <div class="thumbnail-card" data-title="The Chef's Secret"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Chef's Secret</h3></div></div>
+                <div class="thumbnail-card" data-title="Echoes of the Past"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Echoes of the Past</h3></div></div>
+                <div class="thumbnail-card" data-title="City of Neon"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">City of Neon</h3></div></div>
+                <div class="thumbnail-card" data-title="Mountain Siege"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Mountain Siege</h3></div></div>
+                <div class="thumbnail-card" data-title="Project Chronos"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Project Chronos</h3></div></div>
+                <div class="thumbnail-card" data-title="Wild Savanna"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Wild Savanna</h3></div></div>
+                <div class="thumbnail-card" data-title="The Last Joke"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Last Joke</h3></div></div>
+                <div class="thumbnail-card" data-title="Cyber Dreams"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Cyber Dreams</h3></div></div>
+                <div class="thumbnail-card" data-title="Ocean's Heart"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Ocean's Heart</h3></div></div>
+                <div class="thumbnail-card" data-title="Desert Fury"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Desert Fury</h3></div></div>
+                <div class="thumbnail-card" data-title="The Final Voyage"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Final Voyage</h3></div></div>
+                <div class="thumbnail-card" data-title="Galaxy Wanderers"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Galaxy Wanderers</h3></div></div>
+                <div class="thumbnail-card" data-title="AI Uprising"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">AI Uprising</h3></div></div>
+                <div class="thumbnail-card" data-title="Neptune's Children"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Neptune's Children</h3></div></div>
+                <div class="thumbnail-card" data-title="Mars Colony One"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Mars Colony One</h3></div></div>
+                <div class="thumbnail-card" data-title="The Inheritance"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">The Inheritance</h3></div></div>
+                <div class="thumbnail-card" data-title="Lost City of Gold"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Lost City of Gold</h3></div></div>
+                <div class="thumbnail-card" data-title="Paris in Summer"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Paris in Summer</h3></div></div>
+                <div class="thumbnail-card" data-title="Dimension Drift"><img src="testicon.jpg" alt="Thumbnail" class="thumbnail-image"><div class="card-overlay"><h3 class="card-title">Dimension Drift</h3></div></div>
+            </div>
+            
+            <div class="load-more-container" id="load-more-container">
+                <button class="load-more-btn" id="load-more-btn">Lihat Lainnya</button>
             </div>
         </div>
     </main>
@@ -269,6 +344,10 @@
         </div>
     </footer>
 
+    <button id="scroll-to-top-btn" aria-label="Scroll to top">
+        <i data-lucide="arrow-up"></i>
+    </button>
+    
     <script>
         lucide.createIcons();
         
@@ -284,14 +363,22 @@
             const themeToggleBtn = document.getElementById('theme-toggle-btn');
             const sunIcon = themeToggleBtn.querySelector('.icon-sun');
             const moonIcon = themeToggleBtn.querySelector('.icon-moon');
-
             const yearSpan = document.getElementById('copyright-year');
             const nameSpan = document.getElementById('copyright-name');
             const logoName = document.querySelector('.logo').textContent;
             
+            // --- [BARU] Elemen untuk Fitur Baru ---
+            const loadMoreContainer = document.getElementById('load-more-container');
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+            let currentlyVisible = 10;
+            // -------------------------------------
+
+            // --- Logika Footer Otomatis ---
             yearSpan.textContent = new Date().getFullYear();
             nameSpan.textContent = logoName;
 
+            // --- Logika Mode Gelap & Terang ---
             const applyTheme = (theme) => {
                 if (theme === 'dark') {
                     document.body.classList.add('dark-mode');
@@ -303,10 +390,8 @@
                     moonIcon.style.display = 'none';
                 }
             };
-
             const savedTheme = localStorage.getItem('theme') || 'light';
             applyTheme(savedTheme);
-
             themeToggleBtn.addEventListener('click', () => {
                 const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
                 const newTheme = currentTheme === 'light' ? 'dark' : 'light';
@@ -314,36 +399,75 @@
                 localStorage.setItem('theme', newTheme);
             });
 
-            searchOpenBtn.addEventListener('click', () => {
-                navbar.classList.add('search-active');
-                searchInput.focus();
-            });
-
+            // --- Logika Pencarian ---
+            searchOpenBtn.addEventListener('click', () => navbar.classList.add('search-active'));
             searchCloseBtn.addEventListener('click', () => {
                 navbar.classList.remove('search-active');
                 searchInput.value = '';
                 filterContent();
             });
 
-            mobileMenuToggle.addEventListener('click', () => {
-                mobileMenu.classList.toggle('active');
+            // --- Logika Menu Mobile ---
+            mobileMenuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+            
+            // --- [DI-UPGRADE] Logika Filter & Tampilan Kartu ---
+            const updateCardVisibility = () => {
+                const query = searchInput.value.toLowerCase();
+                const allCards = Array.from(contentCards);
+                let visibleCardsCount = 0;
+
+                // Sembunyikan semua kartu terlebih dahulu
+                allCards.forEach(card => card.style.display = 'none');
+
+                if (query) {
+                    // Jika ada pencarian, tampilkan semua yang cocok
+                    allCards.forEach(card => {
+                        const title = card.dataset.title.toLowerCase();
+                        if (title.includes(query)) {
+                            card.style.display = 'block';
+                            visibleCardsCount++;
+                        }
+                    });
+                    loadMoreContainer.style.display = 'none'; // Sembunyikan tombol saat mencari
+                } else {
+                    // Jika tidak ada pencarian, tampilkan sejumlah `currentlyVisible`
+                    allCards.slice(0, currentlyVisible).forEach(card => {
+                        card.style.display = 'block';
+                        visibleCardsCount++;
+                    });
+                    // Tampilkan atau sembunyikan tombol "Load More"
+                    loadMoreContainer.style.display = currentlyVisible >= allCards.length ? 'none' : 'block';
+                }
+                noResultsMessage.style.display = visibleCardsCount === 0 ? 'block' : 'none';
+            };
+            
+            // --- [BARU] Event Listener untuk Tombol "Lihat Lainnya" ---
+            loadMoreBtn.addEventListener('click', () => {
+                currentlyVisible += 10;
+                updateCardVisibility();
             });
 
+            // --- [BARU] Event Listener untuk "Scroll ke Atas" ---
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            });
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // --- Logika Filter Konten ---
             const filterContent = () => {
-                const query = searchInput.value.toLowerCase();
-                let visibleCards = 0;
-                contentCards.forEach(card => {
-                    const title = card.dataset.title.toLowerCase();
-                    if (title.includes(query)) {
-                        card.style.display = 'block';
-                        visibleCards++;
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-                noResultsMessage.style.display = visibleCards === 0 ? 'block' : 'none';
+                currentlyVisible = 10; // Reset jumlah saat memulai pencarian baru
+                updateCardVisibility();
             };
             searchInput.addEventListener('input', filterContent);
+
+            // Tampilkan kartu awal saat halaman dimuat
+            updateCardVisibility();
         });
     </script>
 </body>
