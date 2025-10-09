@@ -3,14 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Tutorial Download - NIXY GAMING</title>
+    <title>NIXY GAMING - Download & Enjoy Games</title>
     
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     
-    <meta name="description" content="Tutorial cara download game di NIXY GAMING.">
+    <meta name="description" content="Temukan dan unduh ribuan game Android terbaru, aman, dan gratis di NIXY GAMING.">
+    <meta name="keywords" content="download game, apk android, game terbaru, NIXY GAMING">
     <meta name="author" content="NIXY GAMING">
     <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nixygaming.my.id/">
+    <meta property="og:title" content="NIXY GAMING - Download & Enjoy Games">
+    <meta property="og:description" content="Portal terbaik untuk mencari dan mengunduh game Android terbaru.">
+    <meta property="og:image" content="https://nixygaming.my.id/nixygaming.jpg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://nixygaming.my.id/">
+    <meta property="twitter:title" content="NIXY GAMING - Download & Enjoy Games">
+    <meta property="twitter:description" content="Portal terbaik untuk mencari dan mengunduh game Android terbaru.">
+    <meta property="twitter:image" content="https://nixygaming.my.id/nixygaming.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "NIXY GAMING",
+      "url": "https://nixygaming.my.id/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://nixygaming.my.id/?s={search_term_string}"
+        },
+        "query-input": {
+          "@type": "PropertyValueSpecification",
+          "valueRequired": "http://schema.org/True",
+          "valueName": "search_term_string"
+        }
+      },
+      "mainEntity": {
+        "@type": "WebPage",
+        "hasPart": [
+          {"@type": "SiteNavigationElement", "name": "Games", "url": "https://nixygaming.my.id/games/"},
+          {"@type": "SiteNavigationElement", "name": "Blog", "url": "https://nixygaming.my.id/blog/"}
+        ]
+      }
+    }
+    </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
     
@@ -19,7 +56,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
     <style>
-        /* ::: STYLES ADAPTED FROM INDEX.HTML ::: */
         :root {
             --bg-color: #f0f2f5;
             --text-color: #2c3e50;
@@ -29,8 +65,13 @@
             --shadow-color: rgba(0, 0, 0, 0.08);
             --border-color: #e9e9e9;
             --green-color: #28a745; 
+            --green-light-bg: #e9f6ec; 
             --blue-color: #007bff; 
             --red-color: #dc3545; 
+            --purple-color: #6f42c1; 
+            --yellow-color: #ffc107; 
+            --teal-color: #20c997; 
+            --orange-color: #fd7e14; 
             --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
@@ -42,6 +83,7 @@
             --header-bg: #1e1e1e;
             --shadow-color: rgba(0, 0, 0, 0.4);
             --border-color: #333;
+            --green-light-bg: #2c3e50;
         }
         
         html { scroll-behavior: smooth; }
@@ -93,194 +135,878 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
         }
         .header-btn:hover { color: var(--text-color); }
 
-        /* Main Content */
-        main { padding-top: 20px; }
-
-        .content-card {
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 12px var(--shadow-color);
+        /* Overlay */
+        .overlay {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background-color: var(--bg-color);
+            z-index: 1000;
+            opacity: 0; visibility: hidden;
+            transition: var(--transition-smooth);
+            overflow-y: auto;
         }
+        .overlay.active { opacity: 1; visibility: visible; }
         
-        .content-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
-            text-align: center;
+        #menu-overlay { transform: translateX(100%); }
+        #menu-overlay.active { transform: translateX(0); }
+        .overlay-header { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid var(--border-color); }
+        .overlay-close-btn { font-size: 1.8em; margin-left: auto; color: var(--text-color-light); background: none; border: none; cursor: pointer; padding: 5px;}
+        .overlay-close-btn:hover { color: var(--text-color); }
+
+        .menu-search-box { padding: 15px; }
+        .menu-search-box input {
+            width: 100%; padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px; font-size: 1em;
+            background-color: var(--card-bg);
             color: var(--text-color);
         }
-
-        .video-player-wrapper {
-            position: relative;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            background-color: #000; 
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 0 15px;
+            margin-top: 15px;
+        }
+        .menu-grid-item {
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 20px;
             border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+            transition: transform 0.2s;
+        }
+        .menu-grid-item:hover { transform: translateY(-3px); }
+        .menu-grid-item i { font-size: 2em; }
+        .menu-grid-item.home { background-color: var(--blue-color); }
+        .menu-grid-item.games { background-color: var(--red-color); }
+        .menu-grid-item.blog { background-color: var(--yellow-color); color: white; }
+        .menu-grid-item.faq { background-color: var(--teal-color); }
+        .menu-grid-item.dark-mode { background-color: var(--orange-color); }
+        .menu-grid-item.telegram-bg { background-color: #0088cc; }
+        .menu-grid-item.whatsapp-bg { background-color: #25D366; }
+
+        /* Search Overlay */
+        #search-overlay { transform: translateY(-100%); }
+        #search-overlay.active { transform: translateY(0); }
+        #search-overlay .overlay-header { border-bottom: none; }
+        #search-overlay .search-input-wrapper { 
+            display: flex; align-items: center; 
+            background-color: var(--card-bg);
+            border-radius: 50px;
+            padding: 8px 15px;
+            flex-grow: 1; 
+            margin-right: 15px;
+            box-shadow: 0 2px 5px var(--shadow-color);
+        }
+        #search-overlay .search-input-wrapper i {
+            font-size: 1.2em;
+            color: var(--text-color-light); 
+            margin-right: 10px;
+        }
+        #search-overlay input {
+            width: 100%; border: none; background: none;
+            font-size: 1em; padding: 0;
+            color: var(--text-color);
+        }
+        #search-overlay input:placeholder {
+            color: var(--text-color-light);
+            opacity: 0.7;
+        }
+        #search-overlay input:focus { outline: none; }
+
+        .search-content { padding: 15px; }
+
+        /* Banner Slider */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
             overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow-color);
             margin-bottom: 25px;
         }
-        
-        .video-player-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
+        .slider-wrapper {
+            display: flex;
         }
-        
-        .promo-description {
-            text-align: center;
-            padding: 15px;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            font-size: 1rem;
-            color: var(--text-color-light);
-        }
-        .promo-description a {
-            color: var(--blue-color);
-            font-weight: 600;
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            display: block;
             text-decoration: none;
         }
-        .promo-description a:hover {
-            text-decoration: underline;
+        .slide img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            filter: blur(8px);
+        }
+        .slide-title-container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .slide-title {
+            color: white;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+            white-space: normal;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.2em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        .slider-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .prev-btn {
+            left: 15px;
+        }
+        .next-btn {
+            right: 15px;
+        }
+
+        /* Konten Utama */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0;
+            scroll-margin-top: 70px; 
+        }
+        .app-list + .section-header,
+        .categories-wrapper + .footer-container {
+             margin-top: 50px;
+        }
+        .section-title-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-icon {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f7e6e5;
+            border-radius: 50%;
+            color: #d1564f;
+            font-size: 1.2em;
+        }
+        .section-header h2 {
+            font-size: 1.4em;
+            color: var(--text-color);
+        }
+        .view-all-btn {
+            background-color: var(--blue-color);
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .view-all-btn:hover { background-color: #0069d9; }
+
+        .request-btn {
+            background-color: var(--green-color);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+            transition: background-color 0.2s;
+        }
+        .request-btn:hover {
+             background-color: #218838;
         }
         
-        /* Footer */
-        .footer-container {
-            margin-top: 25px;
+        .app-list { display: grid; gap: 15px; }
+        .app-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            display: flex;
+            gap: 15px;
+            transition: var(--transition-smooth);
+            align-items: flex-start;
+            text-decoration: none;
+            opacity: 0;
+        }
+        .app-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px var(--shadow-color); }
+        
+        .card-image-container {
+            position: relative;
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+        }
+        .card-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+        }
+        .card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .card-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .card-title-row h3 {
+            font-size: 1.05em;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.3;
+            color: var(--text-color);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
+        }
+        .card-details {
+            font-size: 0.8em;
+            color: var(--text-color-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            line-height: 1.4;
+        }
+        .card-details span strong::after {
+            content: ":";
+            margin-left: 2px;
+        }
+
+        :not(.results-list).app-list .app-card:nth-child(n + 6) {
+            display: none;
+        }
+        .app-list.show-all .app-card {
+            display: flex !important;
+        }
+
+        .results-list .app-card:nth-child(n + 101) {
+            display: none;
+        }
+        
+        .blog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .blog-post-item {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1em;
+            transition: var(--transition-smooth);
+            display: block; 
+        }
+        .blog-post-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px var(--shadow-color);
+            color: var(--blue-color);
+        }
+
+        .blog-list:not(.show-all) .blog-post-item:nth-child(n + 6) {
+            display: none;
+        }
+
+        .blog-list.show-all .blog-post-item {
+            display: block !important;
+        }
+
+        .categories-wrapper {
             background-color: var(--card-bg);
             border-radius: 16px;
             padding: 20px;
             box-shadow: 0 4px 12px var(--shadow-color);
+            margin-top: 50px;
+        }
+        .category-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 10px;
+        }
+        .category-button {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 8px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.8em;
+            font-weight: 500;
+            box-shadow: none;
+            border: 1px solid var(--border-color);
+            transition: var(--transition-smooth);
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .category-button:hover {
+            background-color: var(--blue-color);
+            color: white;
+            border-color: var(--blue-color);
+            transform: translateY(-2px);
+        }
+
+        .footer-container {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+        .footer-links-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .footer-link {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.8em;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .footer-link:hover {
+            background-color: var(--blue-color);
+            color: white;
+        }
+        .footer-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-color);
+        }
+        .footer-social-icons a {
+            color: var(--text-color-light);
+            font-size: 1.5em;
+            transition: var(--transition-smooth);
+        }
+        .footer-social-icons a:hover {
+            color: var(--blue-color);
+            transform: scale(1.1);
         }
         .footer-copyright {
             text-align: center;
             font-size: 0.8em;
             color: var(--text-color-light);
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
         }
 
-        /* Adblocker Overlay */
-        #adblock-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            z-index: 99999; display: none; align-items: center; justify-content: center;
-            color: #FFFFFF; text-align: center; padding: 20px;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .adblock-modal { max-width: 450px; }
-        .adblock-icon { font-size: 5em; margin-bottom: 20px; color: #DC3545; }
-        .adblock-modal h2 { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
-        .adblock-modal p { font-size: 1.1rem; color: #E5E7EB; line-height: 1.6; }
+        .card-anim {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+         body {
+            padding-top: 0 !important;
+        }
+
+        header {
+            top: var(--anchor-ad-top-offset, 0px);
+        }
+        .card-details strong i {
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
-    
-    <div id="adblock-overlay">
-        <div class="adblock-modal">
-            <i class="fa-solid fa-shield-halved adblock-icon"></i>
-            <h2>AdBlock Terdeteksi</h2>
-            <p>Situs ini didukung oleh iklan. Mohon matikan pemblokir iklan Anda untuk melanjutkan.</p>
-        </div>
-    </div>
 
     <header>
         <div class="header-logo">
-            <a href="index.html"><span class="logo-text"><span class="logo-nixy">NIXY</span><span class="logo-gaming">GAMING</span></span></a>
+            <a href="/"><span class="logo-text"><span class="logo-nixy">NIXY</span><span class="logo-gaming">GAMING</span></span></a>
         </div>
         <div class="header-right">
-            <a href="index.html" class="header-btn" aria-label="Kembali ke Home">
-                <i class="fa-solid fa-home"></i>
-            </a>
             <button id="header-dark-mode-toggle" class="header-btn" aria-label="Ganti Tema">
                 <i class="fa-solid fa-sun"></i>
+            </button>
+            <button id="search-toggle" class="header-btn" aria-label="Buka Pencarian">
+                <i class="fa-solid fa-search"></i>
+            </button>
+            <button id="menu-toggle" class="header-btn" aria-label="Buka Menu">
+                <i class="fa-solid fa-bars"></i>
             </button>
         </div>
     </header>
 
+    <div id="menu-overlay" class="overlay">
+        <div class="overlay-header">
+            <a href="/" style="text-decoration:none;"><span class="logo-text" style="font-size: 1.8em;"><span class="logo-nixy">NIXY</span><span class="logo-gaming">GAMING</span></span></a>
+            <button id="menu-close" class="overlay-close-btn" aria-label="Tutup Menu"><i class="fa-solid fa-times"></i></button>
+        </div>
+        <div class="menu-search-box">
+            <input type="search" id="menu-search-input" placeholder="Cari game...">
+        </div>
+        <div class="menu-grid">
+            <a href="/" class="menu-grid-item home"><i class="fa-solid fa-home"></i><span>Home</span></a>
+            <a href="https://nixygaming.my.id/games/" class="menu-grid-item games"><i class="fa-solid fa-gamepad"></i><span>Games</span></a>
+            <a href="https://nixygaming.my.id/blog/" class="menu-grid-item blog"><i class="fa-solid fa-file-alt"></i><span>Blog</span></a>
+            <a href="/faq.html" class="menu-grid-item faq"><i class="fa fa-question-circle"></i><span>FAQ</span></a>
+            <button id="dark-mode-toggle" class="menu-grid-item dark-mode">
+                <i class="fa-solid fa-sun"></i><span>Dark Mode</span>
+            </button>
+            <a href="https://t.me/+JZVMFir6yM0yZmY1" class="menu-grid-item telegram-bg">
+                <i class="fab fa-telegram-plane"></i>
+                <span>Telegram</span>
+            </a>
+        </div>
+    </div>
+
+    <div id="search-overlay" class="overlay">
+        <div class="overlay-header">
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-search"></i>
+                <input type="search" id="search-input" placeholder="Cari game dan lainnya">
+            </div>
+            <button id="search-close" class="overlay-close-btn" aria-label="Tutup Pencarian"><i class="fa-solid fa-times"></i></button>
+        </div>
+        <div class="search-content">
+            <div id="overlay-search-results" class="app-list results-list"></div>
+            <div id="overlay-no-results" style="display: none; text-align: center; padding: 20px;">
+                <p>Game yang kamu cari tidak ditemukan.</p>
+                <a href="request.html" class="request-btn">Request Game</a>
+            </div>
+        </div>
+    </div>
+
     <main>
         <div class="container">
-            <section class="content-card">
-                
-                <h1 class="content-title">Tutorial Download</h1>
+            <div id="dynamic-content-wrapper">
+                <div id="home-content">
+                    <div class="slider-container">
+                        <div class="slider-wrapper"></div>
+                        <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
 
-                <div class="video-player-wrapper">
-                    <iframe src="https://cdn.jsdelivr.net/gh/nixy-pro/1@main/random/2025-10-07T17-18-57-085Z-InShot_20251007_235200046.mp4" title="Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="section-header" id="new-update-section">
+                        <div class="section-title-group">
+                            <span class="section-icon" style="background-color: #f7f2e5; color: #d1b84f;"><i class="fa-solid fa-star"></i></span>
+                            <h2>New Update</h2>
+                        </div>
+                    </div>
+                    <div class="app-list" id="new-update-list"></div>
+                    
+                    <div class="section-header" id="games-section">
+                        <div class="section-title-group">
+                            <span class="section-icon"><i class="fa-solid fa-gamepad"></i></span>
+                            <h2>Updated Games</h2>
+                        </div>
+                        <button class="view-all-btn">Lihat Semua</button>
+                    </div>
+                    <div class="app-list" id="update-games-list">
+                    <a href="games/fishing-hook-2-v102/" class="app-card" data-title="GAMES"><div class="card-image-container"><img src="https://nixygaming.my.id/games/fishing-hook-2-v102/icon.webp" alt="Fishing Hook 2 v1.0.2"></div><div class="card-content"><div class="card-title-row"><h3>Fishing Hook 2 v1.0.2</h3></div><div class="card-details"><span><strong><i class="fa-solid fa-code-branch"></i> Version</strong> v1.0.2</span></div><div class="card-details"><span><strong><i class="fa-solid fa-folder-open"></i> Category</strong> Sports</span></div></div></a><a href="games/volleyball-king-v129/" class="app-card" data-title="GAMES"><div class="card-image-container"><img src="https://nixygaming.my.id/games/volleyball-king-v129/icon.webp" alt="VolleyBall King v1.2.9"></div><div class="card-content"><div class="card-title-row"><h3>VolleyBall King v1.2.9</h3></div><div class="card-details"><span><strong><i class="fa-solid fa-code-branch"></i> Version</strong> v1.2.9</span></div><div class="card-details"><span><strong><i class="fa-solid fa-folder-open"></i> Category</strong> Sports</span></div></div></a><a href="games/assassins-creed-rebellion-v371/" class="app-card" data-title="GAMES"><div class="card-image-container"><img src="https://nixygaming.my.id/games/assassins-creed-rebellion-v371/icon.png" alt="Assassin’s Creed Rebellion v3.7.1"></div><div class="card-content"><div class="card-title-row"><h3>Assassin’s Creed Rebellion v3.7.1</h3></div><div class="card-details"><span><strong><i class="fa-solid fa-code-branch"></i> Version</strong> v3.7.1</span></div><div class="card-details"><span><strong><i class="fa-solid fa-folder-open"></i> Category</strong> Role Playing</span></div></div></a><a href="games/hungry-shark-world-v7111-mod-apk/" class="app-card" data-title="GAMES"><div class="card-image-container"><img src="https://nixygaming.my.id/games/hungry-shark-world-v7111-mod-apk/icon.png" alt="Hungry Shark World v7.1.11 MOD APK"></div><div class="card-content"><div class="card-title-row"><h3>Hungry Shark World v7.1.11 MOD APK</h3></div><div class="card-details"><span><strong><i class="fa-solid fa-code-branch"></i> Version</strong> v7.1.11</span></div><div class="card-details"><span><strong><i class="fa-solid fa-folder-open"></i> Category</strong> Arcade</span></div></div></a><a href="games/car-simulator-2-v15741-mod-apk-4/" class="app-card" data-title="GAMES"><div class="card-image-container"><img src="https://nixygaming.my.id/games/car-simulator-2-v15741-mod-apk-4/icon.png" alt="Car Simulator 2 v1.57.41 MOD APK"></div><div class="card-content"><div class="card-title-row"><h3>Car Simulator 2 v1.57.41 MOD APK</h3></div><div class="card-details"><span><strong><i class="fa-solid fa-code-branch"></i> Version</strong> v1.57.41</span></div><div class="card-details"><span><strong><i class="fa-solid fa-folder-open"></i> Category</strong> Simulation</span></div></div></a><a href="games/supermarket--motel-simulator-v233/" class="app-card" data-title="GAMES"><div class="card-image-container"><img src="https://nixygaming.my.id/games/supermarket--motel-simulator-v233/icon.webp" alt="Supermarket &amp; Motel Simulator v2.3.3"></div><div class="card-content"><div class="card-title-row"><h3>Supermarket &amp; Motel Simulator v2.3.3</h3></div><div class="card-details"><span><strong><i class="fa-solid fa-code-branch"></i> Version</strong> v2.3.3</span></div><div class="card-details"><span><strong><i class="fa-solid fa-folder-open"></i> Category</strong> Simulation</span></div></div></a><a href="games/farm-city-v21063/" class="app-card" data-title="GAMES"><div class="card-image-container"><img src="https://nixygaming.my.id/games/farm-city-v21063/icon.png" alt="Farm City v2.10.63"></div><div class="card-content"><div class="card-title-row"><h3>Farm City v2.10.63</h3></div><div class="card-details"><span><strong><i class="fa-solid fa-code-branch"></i> Version</strong> v2.10.63</span></div><div class="card-details"><span><strong><i class="fa-solid fa-folder-open"></i> Category</strong> Casual</span></div></div></a><a href="games/owrc-open-world-racing-v10220/" class="app-card" data-title="GAMES"><div class="card-image-container"><img src="https://nixygaming.my.id/games/owrc-open-world-racing-v10220/icon.jpg" alt="OWRC: Open World Racing v1.0220"></div><div class="card-content"><div class="card-title-row"><h3>OWRC: Open World Racing v1.0220</h3></div><div class="card-details"><span><strong><i class="fa-solid fa-code-branch"></i> Version</strong> v1.0220</span></div><div class="card-details"><span><strong><i class="fa-solid fa-folder-open"></i> Category</strong> Racing</span></div></div></a><a href="games/delithe-last-memories-v132181/" class="app-card" data-title="GAMES"><div class="card-image-container"><img src="https://nixygaming.my.id/games/delithe-last-memories-v132181/icon.webp" alt="De:Lithe Last Memories v1.32.181"></div><div class="card-content"><div class="card-title-row"><h3>De:Lithe Last Memories v1.32.181</h3></div><div class="card-details"><span><strong><i class="fa-solid fa-code-branch"></i> Version</strong> v1.32.181</span></div><div class="card-details"><span><strong><i class="fa-solid fa-folder-open"></i> Category</strong> Role Playing</span></div></div></a>
+                    </div>
+
+                    <div class="section-header" id="blog-section" style="margin-top: 50px;">
+                        <div class="section-title-group">
+                            <span class="section-icon" style="background-color: #e5f7f0; color: #4fd18e;"><i class="fa-solid fa-file-alt"></i></span>
+                            <h2>Artikel Blog</h2>
+                        </div>
+                        <button class="view-all-btn">Lihat Semua</button>
+                    </div>
+                    <div class="blog-list app-list" id="blog-list">
+                        <a href="https://nixygaming.my.id/blog/heboh-7-game-android-viral-2025-yang-bikin-nagih-nomor-4-bikin-lupa-waktu.html" class="blog-post-item">Heboh! 7 Game Android Viral 2025 yang Bikin Nagih, Nomor 4 Bikin Lupa Waktu</a>
+                   </div>
+                </div>
+            </div>
+
+            <div id="common-sections">
+                <div class="categories-wrapper">
+                    <div class="category-grid-container" id="game-categories-grid"></div>
                 </div>
                 
-                <div class="promo-description">
-                    <p>Cari game-game seru lainnya di NIXY GAMING! <a href="index.html">Kembali ke Beranda</a>.</p>
-                </div>
-
-            </section>
-
-
+                <footer class="footer-container">
+                    <div class="footer-links-grid">                                
+                        <a href="https://nixygaming.my.id/about/" class="footer-link">About</a>
+                        <a href="https://nixygaming.my.id/privacy-policy/" class="footer-link">Privacy</a>
+                        <a href="https://nixygaming.my.id/contact/" class="footer-link">Contact</a>
+                        <a href="https://nixygaming.my.id/sitemap/" class="footer-link">Sitemap</a>
+                    </div>
+                    <div class="footer-social-icons">
+                        <a href="https://t.me/+JZVMFir6yM0yZmY1" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="/" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                        <a href="/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="/" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="footer-copyright" id="copyright-year">
+                    </div>
+                </footer>
+            </div>
         </div>
     </main>
-    
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // ::: SCRIPTS ADAPTED FROM INDEX.HTML :::
-            const headerDarkModeToggle = document.getElementById('header-dark-mode-toggle');
-            const headerDarkModeIcon = headerDarkModeToggle.querySelector('i');
+document.addEventListener('DOMContentLoaded', function() {
+    // --- Deklarasi Elemen UI ---
+    const homeContent = document.getElementById('home-content');
+    const categoryResultsContainer = document.getElementById('category-results-container');
+    const categoryResultsList = document.getElementById('category-results-list');
+    const categoryResultsTitle = document.getElementById('category-results-title');
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const menuClose = document.getElementById('menu-close');
+    const searchToggle = document.getElementById('search-toggle');
+    const searchOverlay = document.getElementById('search-overlay');
+    const searchClose = document.getElementById('search-close');
+    const mainSearchInput = document.getElementById('search-input');
+    const menuSearchInput = document.getElementById('menu-search-input');
+    const allViewAllButtons = document.querySelectorAll('.view-all-btn');
+    const headerLogoLink = document.querySelector('.header-logo a');
+    
+    const headerDarkModeToggle = document.getElementById('header-dark-mode-toggle');
+    const headerDarkModeIcon = headerDarkModeToggle.querySelector('i');
+    const menuDarkModeToggle = document.getElementById('dark-mode-toggle');
+    const menuDarkModeIcon = menuDarkModeToggle.querySelector('i');
+    
+    const overlaySearchResults = document.getElementById('overlay-search-results');
+    const overlayNoResults = document.getElementById('overlay-no-results');
 
-            const applyTheme = (theme) => {
-                document.body.classList.toggle('dark-mode', theme === 'dark');
-                const iconClass = theme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-                if(headerDarkModeIcon) headerDarkModeIcon.className = iconClass;
-            };
-            
-            const toggleAndApplyTheme = () => {
-                const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
-                applyTheme(newTheme);
-                localStorage.setItem('theme', newTheme);
-            };
+    // --- Fungsi-Fungsi Utama ---
 
-            const setCopyrightYear = () => {
-                const copyrightElement = document.getElementById('copyright-year');
-                if (copyrightElement) {
-                    copyrightElement.innerHTML = `All Right Reserved Copyright © ${new Date().getFullYear()} NIXY GAMING`;
-                }
-            };
+    const toggleOverlay = (overlay, isActive) => {
+        overlay.classList.toggle('active', isActive);
+        document.body.style.overflow = isActive ? 'hidden' : '';
+    };
 
-            let currentTheme = localStorage.getItem('theme') || 'light';
-            applyTheme(currentTheme);
-            headerDarkModeToggle.addEventListener('click', toggleAndApplyTheme);
-            setCopyrightYear();
+    const applyTheme = (theme) => {
+        document.body.classList.toggle('dark-mode', theme === 'dark');
+        // PERBAIKAN: Logika ikon dibalik agar sesuai
+        // Jika tema gelap, tunjukkan ikon BULAN. Jika terang, tunjukkan MATAHARI.
+        const iconClass = theme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+        if(headerDarkModeIcon) headerDarkModeIcon.className = iconClass;
+        if(menuDarkModeIcon) menuDarkModeIcon.className = iconClass;
+    };
+    
+    const toggleAndApplyTheme = () => {
+        const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+        applyTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+    };
 
-            // ::: SCRIPTS FROM TUTORIAL.HTML :::
-            const adBlockOverlay = document.getElementById('adblock-overlay');
-            const showAdBlockerMessage = () => {
-                if (adBlockOverlay) {
-                    adBlockOverlay.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                }
-            };
+    const showHomeContent = () => {
+        homeContent.style.display = 'block';
+        categoryResultsContainer.style.display = 'none';
+        mainSearchInput.value = '';
+        menuSearchInput.value = '';
+    };
 
-            const checkAdBlock = () => {
-                fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' }))
-                .catch(err => { showAdBlockerMessage(); });
-                const bait = document.createElement('div');
-                bait.innerHTML = '&nbsp;';
-                bait.className = 'ad adsbox';
-                bait.style.cssText = 'position:absolute; left:-9999px; top:-9999px; height:1px; width:1px;';
-                document.body.appendChild(bait);
-                setTimeout(() => {
-                    if (bait.offsetHeight === 0) { showAdBlockerMessage(); }
-                    bait.remove();
-                }, 100);
-            };
-            checkAdBlock();
-            
-            document.addEventListener('contextmenu', event => event.preventDefault());
+    const executeSearch = (query) => {
+        const searchTerm = query.toLowerCase().trim();
+        
+        if (!searchTerm) {
+            overlaySearchResults.innerHTML = '';
+            overlayNoResults.style.display = 'none';
+            return;
+        }
+
+        const allItems = document.querySelectorAll('#update-games-list .app-card');
+        
+        const matchingGames = [];
+        allItems.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const categoryElement = card.querySelectorAll('.card-details')[1];
+            const categoryText = categoryElement ? categoryElement.textContent.toLowerCase() : '';
+            if (title.includes(searchTerm) || categoryText.includes(searchTerm)) {
+                matchingGames.push(card);
+            }
         });
-    </script>
+        
+        overlaySearchResults.innerHTML = '';
+
+        if (matchingGames.length > 0) {
+            const addedGameBaseNames = new Set();
+            matchingGames.forEach(item => {
+                const title = item.querySelector('h3').textContent;
+                const baseName = title.replace(/\s*v[\d\.]+.*$/i, '').trim();
+                if (!addedGameBaseNames.has(baseName)) {
+                    const clonedCard = item.cloneNode(true);
+                    clonedCard.style.opacity = 1;
+                    overlaySearchResults.appendChild(clonedCard);
+                    addedGameBaseNames.add(baseName);
+                }
+            });
+            overlayNoResults.style.display = 'none';
+        } else {
+            overlayNoResults.style.display = 'block';
+        }
+    };
+    
+    const showCategoryResults = (categoryName) => {
+        const allItems = document.querySelectorAll('#update-games-list .app-card');
+        homeContent.style.display = 'none';
+        categoryResultsContainer.style.display = 'block';
+        categoryResultsTitle.textContent = `Result: ${categoryName}`;
+        categoryResultsList.innerHTML = '';
+
+        const matchingItems = [];
+        allItems.forEach(card => {
+            const categoryElement = card.querySelectorAll('.card-details')[1];
+            if (categoryElement && categoryElement.textContent.replace('Category', '').trim() === categoryName) {
+                matchingItems.push(card);
+            }
+        });
+
+        const addedBaseNames = new Set();
+        matchingItems.forEach(item => {
+            const title = item.querySelector('h3').textContent;
+            const baseName = title.replace(/\s*v[\d\.]+.*$/i, '').trim();
+            if (!addedBaseNames.has(baseName)) {
+                categoryResultsList.appendChild(item.cloneNode(true));
+                addedBaseNames.add(baseName);
+            }
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (menuOverlay.classList.contains('active')) toggleOverlay(menuOverlay, false);
+        if (searchOverlay.classList.contains('active')) toggleOverlay(searchOverlay, false);
+    };
+
+    const generateCategories = (sourceListSelector, targetGridSelector) => {
+        const sourceList = document.querySelector(sourceListSelector);
+        const targetGrid = document.querySelector(targetGridSelector);
+        if (!sourceList || !targetGrid) return;
+        const categories = new Set();
+        sourceList.querySelectorAll('.app-card').forEach(card => {
+            const categoryDetail = card.querySelectorAll('.card-details')[1];
+            if (categoryDetail) {
+                const categoryText = categoryDetail.textContent.replace('Category', '').trim();
+                if (categoryText) categories.add(categoryText);
+            }
+        });
+        targetGrid.innerHTML = '';
+        categories.forEach(category => {
+            const link = document.createElement('a');
+            link.className = 'category-button';
+            link.href = '#';
+            link.textContent = category;
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                showCategoryResults(category);
+            });
+            targetGrid.appendChild(link);
+        });
+    };
+
+    const populateNewUpdateSection = () => {
+        const newUpdateList = document.getElementById('new-update-list');
+        const gamesList = document.getElementById('update-games-list');
+        if (!newUpdateList || !gamesList) return;
+        
+        const latestGames = Array.from(gamesList.querySelectorAll('.app-card')).slice(0, 5);
+        latestGames.forEach(game => newUpdateList.appendChild(game.cloneNode(true)));
+    };
+    
+    const animateCards = () => {
+        const cards = document.querySelectorAll('#home-content .app-card, #home-content .blog-post-item');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('card-anim');
+            }, index * 80);
+        });
+    };
+    
+    const setCopyrightYear = () => {
+        const copyrightElement = document.getElementById('copyright-year');
+        if (copyrightElement) {
+            copyrightElement.innerHTML = `All Right Reserved Copyright © ${new Date().getFullYear()}`;
+        }
+    };
+
+    const populateBannerSlider = () => {
+        const sliderWrapper = document.querySelector('.slider-wrapper');
+        const gameCards = Array.from(document.querySelectorAll('#update-games-list .app-card'));
+
+        if (!sliderWrapper || gameCards.length === 0) return;
+
+        for (let i = gameCards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [gameCards[i], gameCards[j]] = [gameCards[j], gameCards[i]];
+        }
+
+        const selectedCards = gameCards.slice(0, 10);
+
+        let slidesHTML = '';
+        selectedCards.forEach(card => {
+            const postUrl = card.getAttribute('href');
+            const imageElement = card.querySelector('.card-image-container img');
+            if (!imageElement) return;
+            const imageUrl = imageElement.getAttribute('src');
+            const gameTitle = card.querySelector('h3').textContent;
+            
+            slidesHTML += `
+                <a href="${postUrl}" class="slide">
+                    <img src="${imageUrl}" alt="Banner for ${gameTitle}" loading="lazy">
+                    <div class="slide-title-container">
+                        <h3 class="slide-title">${gameTitle}</h3>
+                    </div>
+                </a>
+            `;
+        });
+
+        sliderWrapper.innerHTML = slidesHTML;
+    };
+
+    // --- Inisialisasi & Event Listeners ---
+    
+    populateBannerSlider();
+
+    const sliderContainer = document.querySelector('.slider-container');
+    if (sliderContainer) {
+        const sliderWrapper = document.querySelector('.slider-wrapper');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const slides = document.querySelectorAll('.slide');
+        
+        if (slides.length > 0) {
+            const totalSlides = slides.length;
+            let currentIndex = Math.floor(Math.random() * totalSlides);
+            let slideInterval;
+
+            const updateSliderPosition = () => {
+                sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            };
+            const nextSlide = () => {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSliderPosition();
+            };
+            const prevSlide = () => {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSliderPosition();
+            };
+            const startAutoSlide = () => {
+                slideInterval = setInterval(nextSlide, 5000);
+            };
+            const resetAutoSlide = () => {
+                clearInterval(slideInterval);
+                startAutoSlide();
+            };
+
+            nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextSlide(); resetAutoSlide(); });
+            prevBtn.addEventListener('click', (e) => { e.preventDefault(); prevSlide(); resetAutoSlide(); });
+
+            sliderWrapper.style.transition = 'none'; 
+            updateSliderPosition(); 
+            setTimeout(() => {
+                sliderWrapper.style.transition = 'transform 0.5s ease-in-out';
+            }, 50);
+
+            startAutoSlide();
+        }
+    }
+
+    menuToggle.addEventListener('click', () => toggleOverlay(menuOverlay, true));
+    menuClose.addEventListener('click', () => toggleOverlay(menuOverlay, false));
+    searchToggle.addEventListener('click', () => {
+        toggleOverlay(searchOverlay, true);
+        mainSearchInput.focus();
+    });
+    searchClose.addEventListener('click', () => toggleOverlay(searchOverlay, false));
+
+    let currentTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(currentTheme);
+    
+    headerDarkModeToggle.addEventListener('click', toggleAndApplyTheme);
+    menuDarkModeToggle.addEventListener('click', toggleAndApplyTheme);
+
+    mainSearchInput.addEventListener('input', e => executeSearch(e.target.value));
+    menuSearchInput.addEventListener('input', e => executeSearch(e.target.value));
+    
+    allViewAllButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const listContainer = this.parentElement.nextElementSibling;
+            if (listContainer) {
+                listContainer.classList.add('show-all');
+                this.style.display = 'none'; 
+            }
+        });
+    });
+
+    headerLogoLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showHomeContent();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // --- Menjalankan Fungsi Saat Halaman Dimuat ---
+    setCopyrightYear();
+    populateNewUpdateSection();
+    generateCategories('#update-games-list', '#game-categories-grid');
+    animateCards();
+});
+</script>
+
 </body>
 </html>
